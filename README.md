@@ -28,7 +28,7 @@
 
 # JS Resources
 
-## Free beginner resources to get started with HTML, CSS and JavaScript
+## Beginner resources to get started with HTML, CSS and JavaScript
 2. https://developer.mozilla.org/en-US/docs/Learn - a good starting point to learn about web dev fundamentals
 3. https://javascript.info/ - quite a good JS tutorial according to many posts
 4. https://www.freecodecamp.org - curriculum including HTML/CSS/JS, React, Node.js, Express, and MongoDB
