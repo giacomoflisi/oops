@@ -28,13 +28,28 @@
 
 # JS Resources
 
+## Creating an Android project
+
+>https://developer.android.com/training/basics/firstapp/creating-project
+>https://rapidapi.com/blog/android-app-javascript/
+
+QR code APIs list
+>https://rapidapi.com/collection/top-qr-code-api
+
+JS frameworks for mobile app dev
+>https://medium.com/front-end-weekly/top-javascript-frameworks-for-mobile-app-development-2063890a9038
+
+F-DROID list of open-source apps
+>https://f-droid.org/en/packages/
+
+
 ## Beginner resources to get started with HTML, CSS and JavaScript
-2. https://developer.mozilla.org/en-US/docs/Learn - a good starting point to learn about web dev fundamentals
-3. https://javascript.info/ - quite a good JS tutorial according to many posts
-4. https://www.freecodecamp.org - curriculum including HTML/CSS/JS, React, Node.js, Express, and MongoDB
-5. https://www.theodinproject.com - curriculum including HTML/CSS/JS, Ruby on Rails, and SQL
-6. https://fullstackopen.com/en/ - requires you to have basic web dev, db and git knowledge
-7. https://flexboxfroggy.com/ and https://codepip.com/games/grid-garden/ - learn flex/grid in CSS
+> https://developer.mozilla.org/en-US/docs/Learn - a good starting point to learn about web dev fundamentals
+> https://javascript.info/ - quite a good JS tutorial according to many posts
+> https://www.freecodecamp.org - curriculum including HTML/CSS/JS, React, Node.js, Express, and MongoDB
+> https://www.theodinproject.com - curriculum including HTML/CSS/JS, Ruby on Rails, and SQL
+> https://fullstackopen.com/en/ - requires you to have basic web dev, db and git knowledge
+> https://flexboxfroggy.com/ and https://codepip.com/games/grid-garden/ - learn flex/grid in CSS
  
 ## List of design resources
 > https://ghostbin.com/paste/rTwHe
