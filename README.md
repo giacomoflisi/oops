@@ -1,6 +1,21 @@
 # oop-project
 
-## Ideas
+## How to use Git
+
+### Setup for Windows
+1. https://phoenixnap.com/kb/how-to-install-git-windows
+2. https://www.youtube.com/watch?v=eo00v2aw92Y
+3. http://guides.beanstalkapp.com/version-control/git-on-windows.html
+4. https://www.computerhope.com/issues/ch001927.htm
+
+### using Git
+> how to use Git and GitHub video (https://www.youtube.com/watch?v=HkdAHXoRtos)
+> Git basics (https://www.atlassian.com/git)
+> Git for beginngers (https://product.hubspot.com/blog/git-and-github-tutorial-for-beginners)
+> A step-by-step guide to Git (https://opensource.com/article/18/1/step-step-guide-git)
+
+
+## Java Project Ideas
 
 1. JS clock
 2. Interactive map with 3d models (https://codepen.io/aomyers/pen/LWOwpR)
@@ -25,25 +40,24 @@
 21. habit tracker, mood tracker, reminders, streak count and reward system
 
 
+## Java Resources
 
-# JS Resources
+### Creating an Android project
 
-## Creating an Android project
-
->https://developer.android.com/training/basics/firstapp/creating-project
->https://rapidapi.com/blog/android-app-javascript/
+> https://developer.android.com/training/basics/firstapp/creating-project
+> https://rapidapi.com/blog/android-app-javascript/
 
 QR code APIs list
->https://rapidapi.com/collection/top-qr-code-api
+> https://rapidapi.com/collection/top-qr-code-api
 
 JS frameworks for mobile app dev
->https://medium.com/front-end-weekly/top-javascript-frameworks-for-mobile-app-development-2063890a9038
+> https://medium.com/front-end-weekly/top-javascript-frameworks-for-mobile-app-development-2063890a9038
 
 F-DROID list of open-source apps
->https://f-droid.org/en/packages/
+> https://f-droid.org/en/packages/
 
 
-## Beginner resources to get started with HTML, CSS and JavaScript
+### Beginner resources to get started with HTML, CSS and JavaScript
 > https://developer.mozilla.org/en-US/docs/Learn - a good starting point to learn about web dev fundamentals
 > https://javascript.info/ - quite a good JS tutorial according to many posts
 > https://www.freecodecamp.org - curriculum including HTML/CSS/JS, React, Node.js, Express, and MongoDB
@@ -51,8 +65,7 @@ F-DROID list of open-source apps
 > https://fullstackopen.com/en/ - requires you to have basic web dev, db and git knowledge
 > https://flexboxfroggy.com/ and https://codepip.com/games/grid-garden/ - learn flex/grid in CSS
  
-## List of design resources
-> https://ghostbin.com/paste/rTwHe
+### List of DESIGN resources > https://ghostbin.com/paste/rTwHe
  
-## All useful documentation in one place
+### All useful documentation in one place
 > https://devdocs.io
