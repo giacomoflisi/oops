@@ -113,7 +113,8 @@ JS frameworks for mobile app dev
 - https://fullstackopen.com/en/ - requires you to have basic web dev, db and git knowledge
 - https://flexboxfroggy.com/ and https://codepip.com/games/grid-garden/ - learn flex/grid in CSS
  
-### List of DESIGN resources > https://ghostbin.com/paste/rTwHe
+### List of DESIGN resources 
+- https://ghostbin.com/paste/rTwHe
  
 ### All useful documentation in one place
 - https://devdocs.io
