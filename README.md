@@ -14,6 +14,42 @@
 - Git for beginngers (https://product.hubspot.com/blog/git-and-github-tutorial-for-beginners)
 - A step-by-step guide to Git (https://opensource.com/article/18/1/step-step-guide-git)
 
+## Java open-source Android apps
+> https://f-droid.org/en/packages/
+
+### Weather
+- https://github.com/xcc3641/SeeWeather
+
+### Social networking
+- Android-oss: https://github.com/kickstarter/android-oss
+- NewPipe: https://github.com/TeamNewPipe/NewPipe
+- Wordpress: https://github.com/wordpress-mobile/WordPress-Android
+
+### News
+- Plaid: https://github.com/nickbutcher/plaid
+- FastHub: https://github.com/k0shk0sh/FastHub
+- Materialistic: https://github.com/hidroh/materialistic
+
+### Photo & Videos
+- Telecine: https://github.com/JakeWharton/Telecine
+- LeafPic: https://github.com/UnevenSoftware/LeafPic
+
+### Productivity
+- K-9 Mail: https://github.com/k9mail/k-9
+- OwnCloud: https://github.com/owncloud/android
+- AmazeFileManager: https://github.com/TeamAmaze/AmazeFileManager
+- Omni-Notes: https://github.com/federicoiosue/Omni-Notes
+
+### Media
+- ExoPlayer: https://github.com/google/ExoPlayer
+- VLC MediaPlayer: https://github.com/videolan/vlc
+- AntennaPod: https://github.com/AntennaPod/AntennaPod
+- MovieGuide: https://github.com/esoxjem/MovieGuide
+
+### Android App Architecture
+- https://github.com/android10/Android-CleanArchitecture
+- https://github.com/ivacf/archi
+- https://github.com/MindorksOpenSource/android-mvp-architecture
 
 ## Java Project Ideas
 
@@ -42,6 +78,21 @@
 
 ## Java Resources
 
+* https://git-scm.com/
+* http://www.pythontutor.com/
+* https://www.w3resource.com/
+* https://www.programiz.com/
+* https://www.baeldung.com/
+* https://pynative.com/
+* https://exercism.io/
+* https://github.com/mtdvio/every-programmer-should-know
+* https://github.com/charlax/professional-programming
+* https://github.com/sindresorhus/awesome
+
+### Videos
+* [YouTube OOP Java](https://www.youtube.com/watch?v=y3H3xwI0prM&list=PLhlcRDRHVUzTruZmXalUSJAK26pouP8ST)
+* [YouTube IntelliJ](https://www.youtube.com/c/intellijidea/videos)
+
 ### Creating an Android project
 
 - https://developer.android.com/training/basics/firstapp/creating-project
@@ -52,9 +103,6 @@ QR code APIs list
 
 JS frameworks for mobile app dev
 - https://medium.com/front-end-weekly/top-javascript-frameworks-for-mobile-app-development-2063890a9038
-
-F-DROID list of open-source apps
-- https://f-droid.org/en/packages/
 
 
 ### Beginner resources to get started with HTML, CSS and JavaScript
