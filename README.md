@@ -1,5 +1,5 @@
 # oop-project
-## Github succhia cazzi
+
 ## How to use Git
 
 ### Setup for Windows
