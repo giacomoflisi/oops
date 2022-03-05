@@ -22,4 +22,10 @@
             android:name="com.example.wakeapp.ui.notifications.NotificationsFragment"
             android:label="@string/title_notifications"
             tools:layout="@layout/fragment_notifications"/>
+
+    <fragment
+            android:id="@+id/navigation_clock"
+            android:name="com.example.wakeapp.ui.clock.ClockFragment"
+            android:label="@string/title_clock"
+            tools:layout="@layout/fragment_clock"/>
 </navigation>
