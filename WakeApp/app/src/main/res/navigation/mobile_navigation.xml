@@ -28,4 +28,10 @@
             android:name="com.example.wakeapp.ui.clock.ClockFragment"
             android:label="@string/title_clock"
             tools:layout="@layout/fragment_clock"/>
+
+    <fragment
+            android:id="@+id/navigation_tomato"
+            android:name="com.example.wakeapp.ui.tomato.TomatoFragment"
+            android:label="@string/title_tomato"
+            tools:layout="@layout/fragment_tomato"/>
 </navigation>

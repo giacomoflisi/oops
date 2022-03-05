@@ -1,4 +1,4 @@
-package com.example.wakeapp.ui.alarms;
+package com.example.wakeapp.ui.tomato;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,23 +11,23 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import com.example.wakeapp.R;
-import com.example.wakeapp.databinding.FragmentAlarmsBinding;
+import com.example.wakeapp.databinding.FragmentTomatoBinding;
 
-public class AlarmsFragment extends Fragment {
+public class TomatoFragment extends Fragment {
 
-    private AlarmsViewModel alarmsViewModel;
-    private FragmentAlarmsBinding binding;
+    private TomatoViewModel tomatoViewModel;
+    private FragmentTomatoBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        alarmsViewModel =
-                new ViewModelProvider(this).get(AlarmsViewModel.class);
+        tomatoViewModel =
+                new ViewModelProvider(this).get(TomatoViewModel.class);
 
-        binding = FragmentAlarmsBinding.inflate(inflater, container, false);
+        binding = FragmentTomatoBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textAlarms;
-        alarmsViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        final TextView textView = binding.textTomato;
+        tomatoViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
