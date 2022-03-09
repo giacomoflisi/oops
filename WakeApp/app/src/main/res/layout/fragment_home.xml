@@ -7,14 +7,17 @@
         android:layout_height="match_parent"
         tools:context=".ui.home.HomeFragment">
 
-    <AnalogClock
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+
+    <com.example.wakeapp.ui.home.AnalogClockView
+            android:layout_height="230dp"
+            android:layout_width="230dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent" app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintVertical_bias="0.207" android:visibility="visible"/>
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintVertical_bias="0.086"/>
+
     <TextView
             android:id="@+id/text_home"
             android:layout_width="match_parent"
