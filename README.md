@@ -7,7 +7,6 @@
 - [Services class overview](https://www.geeksforgeeks.org/services-in-android-with-example/)
 - [scanning QR codes with CAMView library](https://www.geeksforgeeks.org/how-to-read-qr-code-using-camview-library-in-android/)
 - [more QR codes with Zxing library](https://www.geeksforgeeks.org/how-to-read-qr-code-using-zxing-library-in-android/)
-- [coding a custom analog clock](https://medium.com/@mayurjajoomj/custom-analog-clock-using-custom-view-android-429cc180f6a3)
 
 ## Git
 - [Git basics](https://www.atlassian.com/git)
