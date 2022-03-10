@@ -9,6 +9,7 @@ import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
 import androidx.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Calendar;
 
@@ -35,7 +36,7 @@ public class AnalogClockView extends View {
     private int mHourHandSize;
     private int mHandSize;
 
-    public float mFontSize = 5;
+    public float mFontSize = 40;
 
     public AnalogClockView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
@@ -45,7 +46,7 @@ public class AnalogClockView extends View {
 
         mHeight = getHeight();
         mWidth = getWidth();
-        mPadding = 50;
+        mPadding = 200;
 
         mCentreX = mWidth/2;
         mCentreY = mHeight/2;
@@ -82,7 +83,7 @@ public class AnalogClockView extends View {
         postInvalidateDelayed(500);
     }
 
-    private void drawCircle(Canvas canvas){
+    private void drawCircle(@NotNull Canvas canvas){
         mPaint.reset();
         setPaintAttributes(Color.WHITE, Paint.Style.STROKE, 10);
         canvas.drawCircle(mCentreX, mCentreY, mRadius, mPaint);
