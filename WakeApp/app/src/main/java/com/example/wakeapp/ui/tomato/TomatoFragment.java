@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,10 +15,11 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.wakeapp.R;
 import com.example.wakeapp.databinding.FragmentTomatoBinding;
 
-public class TomatoFragment extends Fragment {
+public class TomatoFragment extends Fragment implements Button.OnClickListener{
 
     private TomatoViewModel tomatoViewModel;
     private FragmentTomatoBinding binding;
+    private ImageButton mImageButton;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -26,13 +29,9 @@ public class TomatoFragment extends Fragment {
         binding = FragmentTomatoBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textTomato;
-        tomatoViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
+        mImageButton = (ImageButton) mImageButton.findViewById(R.id.play_button);
+        mImageButton.setOnClickListener(this);
+
         return root;
     }
 
@@ -40,5 +39,12 @@ public class TomatoFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    //play timer click listener
+    @Override
+    public void onClick(View view){
+
+
     }
 }
