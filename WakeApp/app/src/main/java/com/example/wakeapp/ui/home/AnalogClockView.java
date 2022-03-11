@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.ImageView;
 import androidx.annotation.Nullable;
 import org.jetbrains.annotations.NotNull;
 
@@ -63,8 +64,6 @@ public class AnalogClockView extends View {
         mHourHandSize = mRadius - mRadius/2;
         mHandSize = mRadius - mRadius/4;
 
-        mNumbers = new int[] {1, 2, 3,  4, 5, 6, 7, 8, 9, 10, 11, 12};
-
         mIsInit = true;
     }
 
@@ -76,18 +75,11 @@ public class AnalogClockView extends View {
             init();
         }
 
-        drawCircle(canvas);
         drawHands(canvas);
-        drawNumerals(canvas);
 
         postInvalidateDelayed(500);
     }
 
-    private void drawCircle(@NotNull Canvas canvas){
-        mPaint.reset();
-        setPaintAttributes(Color.WHITE, Paint.Style.STROKE, 10);
-        canvas.drawCircle(mCentreX, mCentreY, mRadius, mPaint);
-    }
 
     private void setPaintAttributes(int color, Paint.Style stroke, int strokeWidth){
         mPaint.reset();
@@ -143,20 +135,9 @@ public class AnalogClockView extends View {
                 (float)(mCentreX + Math.cos(mAngle)*mHandSize),
                 (float)(mCentreY + Math.sin(mAngle)*mHourHandSize),
                 mPaint);
+
     }
 
-    private void drawNumerals(Canvas canvas){
-        mPaint.setTextSize(mFontSize);
 
-        for (int number : mNumbers){
-            String num = String.valueOf(number);
-            mPaint.getTextBounds(num, 0, num.length(), mRect);
 
-            double angle = Math.PI / 6 * (number - 3);
-            int x = (int) (mCentreX + Math.cos(angle) * mRadius - mRect.width() / 2);
-            int y = (int) (mCentreY + Math.sin(angle) * mRadius - mRect.height() / 2);
-
-            canvas.drawText(num, x, y, mPaint);
-        }
-    }
 }
