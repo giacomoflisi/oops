@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Documenti/Unimore/PROGRAMMAZIONE AD OGGETTI/Project - WAKE APP/WakeApp/app/src/main/res/layout/activity_main.xml" value="0.2750352609308886" />
+        <entry key="..\:/Documenti/Unimore/PROGRAMMAZIONE AD OGGETTI/Project - WAKE APP/WakeApp/app/src/main/res/layout/fragment_alarms.xml" value="0.1015625" />
+      </map>
+    </option>
+  </component>
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$/WakeApp" />
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="17" project-jdk-type="JavaSDK" />
+</project>
