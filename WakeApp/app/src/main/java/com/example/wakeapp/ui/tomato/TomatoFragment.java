@@ -5,22 +5,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.TextView;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import com.example.wakeapp.R;
-import com.example.wakeapp.databinding.FragmentTomatoBinding;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class TomatoFragment extends Fragment implements Button.OnClickListener{
 
-    private TomatoViewModel tomatoViewModel;
-    private FragmentTomatoBinding binding;
-    private ImageButton mImageButton;
+    private FloatingActionButton mActionButton;
 
+
+    /*
+    *
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         tomatoViewModel =
@@ -29,21 +25,28 @@ public class TomatoFragment extends Fragment implements Button.OnClickListener{
         binding = FragmentTomatoBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        mImageButton = (ImageButton) mImageButton.findViewById(R.id.play_button);
-        mImageButton.setOnClickListener(this);
-
         return root;
+    }
+    */
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             ViewGroup container, Bundle savedInstanceState) {
+        View view;
+        view = inflater.inflate(R.layout.fragment_tomato, container, false);
+        mActionButton = view.findViewById(R.id.floatingPlayButton);
+        mActionButton.setOnClickListener(this);
+
+        return view;
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        binding = null;
     }
 
     //play timer click listener
     @Override
     public void onClick(View view){
+
 
 
     }
