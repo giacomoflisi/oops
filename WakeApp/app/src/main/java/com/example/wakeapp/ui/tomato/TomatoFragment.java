@@ -1,10 +1,13 @@
 package com.example.wakeapp.ui.tomato;
 
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import com.example.wakeapp.R;
@@ -12,8 +15,16 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class TomatoFragment extends Fragment implements Button.OnClickListener{
 
-    private FloatingActionButton mActionButton;
+    private FloatingActionButton mStartButton, mPauseButton, getmCancelButton;
+    private EditText hoursEditText, minutesEditText, secondsEditText;
 
+    int hoursLeft, minutesLeft, secondsLeft, totalSecondsLeft;
+    TextView hoursLeftText, minutesLeftText, secondsLeftText;
+    TextView countDownText;
+
+    private CountDownTimer timer;
+
+    boolean isPaused = false;
 
     /*
     *
@@ -28,12 +39,15 @@ public class TomatoFragment extends Fragment implements Button.OnClickListener{
         return root;
     }
     */
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View view;
         view = inflater.inflate(R.layout.fragment_tomato, container, false);
-        mActionButton = view.findViewById(R.id.floatingPlayButton);
-        mActionButton.setOnClickListener(this);
+        hoursEditText = view.findViewById(R.id.hours);
+        minutesEditText = view.findViewById(R.id.minutes);
+        secondsEditText = view.findViewById(R.id.seconds);
+
 
         return view;
     }
