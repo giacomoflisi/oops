@@ -22,8 +22,8 @@
             android:title="@string/title_clock"/>
 
     <item
-            android:id="@+id/navigation_tomato"
-            android:icon="@drawable/ic_launcher_foreground"
-            android:title="@string/title_tomato"/>
+            android:id="@+id/navigation_timer"
+            android:icon="@drawable/ic_baseline_timer_24"
+            android:title="@string/title_timer"/>
 
 </menu>

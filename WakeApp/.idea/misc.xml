@@ -6,7 +6,12 @@
         <entry key="../../../../layout/custom_preview.xml" value="0.23981481481481481" />
         <entry key="../../.gradle/caches/transforms-3/b6f0d187be5c9a123a53118d219dfb77/transformed/material-1.5.0/res/drawable/ic_clock_black_24dp.xml" value="0.26666666666666666" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.23981481481481481" />
+        <entry key="app/src/main/res/drawable/ic_baseline_access_alarm_24.xml" value="0.24444444444444444" />
         <entry key="app/src/main/res/drawable/ic_baseline_add_circle_24.xml" value="0.24444444444444444" />
+        <entry key="app/src/main/res/drawable/ic_baseline_alarm_off_24.xml" value="0.24444444444444444" />
+        <entry key="app/src/main/res/drawable/ic_baseline_cancel_24.xml" value="0.24444444444444444" />
+        <entry key="app/src/main/res/drawable/ic_baseline_delete_24.xml" value="0.24444444444444444" />
+        <entry key="app/src/main/res/drawable/ic_baseline_fitness_center_24.xml" value="0.24444444444444444" />
         <entry key="app/src/main/res/drawable/ic_dashboard_black_24dp.xml" value="0.23981481481481481" />
         <entry key="app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.23981481481481481" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.23981481481481481" />
@@ -15,14 +20,16 @@
         <entry key="app/src/main/res/drawable/ic_tomato_black_xml.xml" value="0.23981481481481481" />
         <entry key="app/src/main/res/drawable/play_button.xml" value="0.24444444444444444" />
         <entry key="app/src/main/res/layout-w1240dp/content_scrolling.xml" value="0.15703125" />
+        <entry key="app/src/main/res/layout-w936dp/content_scrolling.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_scrolling.xml" value="0.10833333333333334" />
-        <entry key="app/src/main/res/layout/content_scrolling.xml" value="0.10677083333333333" />
+        <entry key="app/src/main/res/layout/content_scrolling.xml" value="0.14" />
         <entry key="app/src/main/res/layout/fragment_alarms.xml" value="0.16304347826086957" />
         <entry key="app/src/main/res/layout/fragment_clock.xml" value="0.16304347826086957" />
         <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.16304347826086957" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.16304347826086957" />
+        <entry key="app/src/main/res/layout/fragment_timer.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_tomato.xml" value="0.33" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.265625" />
         <entry key="app/src/main/res/menu/menu_scrolling.xml" value="0.12291666666666666" />

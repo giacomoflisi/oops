@@ -1,4 +1,4 @@
-package com.example.wakeapp.ui.tomato;
+package com.example.wakeapp.ui.timer;
 
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -9,11 +9,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import com.example.wakeapp.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-public class TomatoFragment extends Fragment implements Button.OnClickListener{
+public class TimerFragment extends Fragment implements Button.OnClickListener{
 
     private FloatingActionButton mStartButton, mPauseButton, getmCancelButton;
     private EditText hoursEditText, minutesEditText, secondsEditText;
@@ -30,20 +31,26 @@ public class TomatoFragment extends Fragment implements Button.OnClickListener{
     *
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        tomatoViewModel =
-                new ViewModelProvider(this).get(TomatoViewModel.class);
+        timerViewModel =
+                new ViewModelProvider(this).get(TimerViewModel.class);
 
-        binding = FragmentTomatoBinding.inflate(inflater, container, false);
+        binding = FragmentTimerBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         return root;
     }
     */
 
+    @Override
+    public void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        View view;
-        view = inflater.inflate(R.layout.fragment_tomato, container, false);
+
+        View view = inflater.inflate(R.layout.fragment_timer, container, false);
+
         hoursEditText = view.findViewById(R.id.hours);
         minutesEditText = view.findViewById(R.id.minutes);
         secondsEditText = view.findViewById(R.id.seconds);

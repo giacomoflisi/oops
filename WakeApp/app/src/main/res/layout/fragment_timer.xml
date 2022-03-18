@@ -5,7 +5,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.tomato.TomatoFragment">
+        tools:context=".ui.timer.TimerFragment">
 
     <LinearLayout
             android:orientation="horizontal"
@@ -13,7 +13,8 @@
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" android:id="@+id/timer_buttons"
-            app:layout_constraintHorizontal_bias="0.497" android:layout_marginBottom="80dp">
+            app:layout_constraintHorizontal_bias="0.497" android:layout_marginBottom="80dp"
+    >
         <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:src="@android:drawable/ic_media_play"
                 android:layout_width="wrap_content"
@@ -58,6 +59,7 @@
                     android:inputType="number"
                     android:maxLength="2"
                     android:selectAllOnFocus="true"
+                    android:autofillHints="hours"
                     android:textSize="48sp"/>
         </LinearLayout>
 
@@ -65,7 +67,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="5"
                 android:layout_height="wrap_content"
-                android:text=":"
+                android:text="@string/time_value_separator"
                 android:textSize="48sp"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"/>
@@ -83,14 +85,15 @@
                     android:inputType="number"
                     android:maxLength="2"
                     android:selectAllOnFocus="true"
-                    android:textSize="48sp"/>
+                    android:textSize="48sp"
+                    android:autofillHints="minutes"/>
         </LinearLayout>
 
         <TextView
                 android:layout_width="0dp"
                 android:layout_weight="5"
                 android:layout_height="wrap_content"
-                android:text=":"
+                android:text="@string/time_value_separator"
                 android:textSize="48sp"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"/>
@@ -104,10 +107,11 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:id="@+id/seconds"
-                    android:text="30"
+                    android:text="00"
                     android:inputType="number"
                     android:maxLength="2"
                     android:selectAllOnFocus="true"
+                    android:autofillHints="seconds"
                     android:textSize="48sp"/>
         </LinearLayout>
     </LinearLayout>

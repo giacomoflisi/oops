@@ -30,8 +30,8 @@
             tools:layout="@layout/fragment_clock"/>
 
     <fragment
-            android:id="@+id/navigation_tomato"
-            android:name="com.example.wakeapp.ui.tomato.TomatoFragment"
-            android:label="@string/title_tomato"
-            tools:layout="@layout/fragment_tomato"/>
+            android:id="@+id/navigation_timer"
+            android:name="com.example.wakeapp.ui.timer.TimerFragment"
+            android:label="@string/title_timer"
+            tools:layout="@layout/fragment_timer"/>
 </navigation>
