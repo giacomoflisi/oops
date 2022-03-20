@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
@@ -8,39 +8,18 @@
         tools:context=".ui.home.HomeFragment">
 
 
-    <com.example.wakeapp.ui.home.AnalogClockView
-            android:layout_height="0dp"
-            android:layout_width="0dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            android:id="@+id/analogClockView" android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="parent"/>
-    <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/clock" android:id="@+id/secondHandView"
-            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="@+id/analogClockView"
-            app:layout_constraintTop_toTopOf="@+id/analogClockView" app:layout_constraintBottom_toBottomOf="parent"/>
-    <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/hourhand" android:id="@+id/minuteHandView"
-            app:layout_constraintTop_toTopOf="@+id/analogClockView"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/analogClockView"
-            app:layout_constraintStart_toStartOf="parent"/>
-    <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/minutehand" android:id="@+id/hourHandView"
-            app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintTop_toTopOf="parent"/>
-    <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/secondhand" android:id="@+id/clockBoardView"
-            app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintTop_toTopOf="parent"/>
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="569dp">
+
+            <com.example.wakeapp.ui.home.AnalogClock
+                    android:layout_width="243dp"
+                    android:layout_height="336dp"
+                    android:layout_gravity="center"/>
+        </FrameLayout>
+    </LinearLayout>
+</LinearLayout>
