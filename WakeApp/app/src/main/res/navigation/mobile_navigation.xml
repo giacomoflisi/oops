@@ -7,15 +7,15 @@
 
     <fragment
             android:id="@+id/navigation_home"
-            android:name="com.example.wakeapp.ui.home.HomeFragment"
-            android:label="@string/title_home"
-            tools:layout="@layout/fragment_home"/>
+            android:name="com.example.wakeapp.ui.home.ClockFragment"
+            android:label="@string/title_clock"
+            tools:layout="@layout/fragment_clock"/>
 
     <fragment
-            android:id="@+id/navigation_dashboard"
-            android:name="com.example.wakeapp.ui.dashboard.DashboardFragment"
-            android:label="@string/title_dashboard"
-            tools:layout="@layout/fragment_dashboard"/>
+            android:id="@+id/navigation_smart"
+            android:name="com.example.wakeapp.ui.smart.SmartFragment"
+            android:label="@string/title_smart"
+            tools:layout="@layout/fragment_smart"/>
 
     <fragment
             android:id="@+id/navigation_alarms"
@@ -24,10 +24,10 @@
             tools:layout="@layout/fragment_alarms"/>
 
     <fragment
-            android:id="@+id/navigation_clock"
-            android:name="com.example.wakeapp.ui.clock.ClockFragment"
-            android:label="@string/title_clock"
-            tools:layout="@layout/fragment_clock"/>
+            android:id="@+id/navigation_chrono"
+            android:name="com.example.wakeapp.ui.chrono.ChronoFragment"
+            android:label="@string/title_chrono"
+            tools:layout="@layout/fragment_chrono"/>
 
     <fragment
             android:id="@+id/navigation_timer"

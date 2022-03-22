@@ -1,16 +1,16 @@
-package com.example.wakeapp.ui.home;
+package com.example.wakeapp.ui.smart;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class HomeViewModel extends ViewModel {
+public class SmartViewModel extends ViewModel {
 
-    private final MutableLiveData<String> mText;
+    private MutableLiveData<String> mText;
 
-    public HomeViewModel() {
+    public SmartViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("Home");
+        mText.setValue("This is dashboard fragment");
     }
 
     public LiveData<String> getText() {

@@ -1,4 +1,4 @@
-package com.example.wakeapp.ui.dashboard;
+package com.example.wakeapp.ui.smart;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,24 +10,23 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import com.example.wakeapp.R;
 import com.example.wakeapp.databinding.FragmentDashboardBinding;
 
-public class DashboardFragment extends Fragment {
+public class SmartFragment extends Fragment {
 
-    private DashboardViewModel dashboardViewModel;
+    private SmartViewModel smartViewModel;
     private FragmentDashboardBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        dashboardViewModel =
-                new ViewModelProvider(this).get(DashboardViewModel.class);
+        smartViewModel =
+                new ViewModelProvider(this).get(SmartViewModel.class);
 
         binding = FragmentDashboardBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         final TextView textView = binding.textDashboard;
-        dashboardViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        smartViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);

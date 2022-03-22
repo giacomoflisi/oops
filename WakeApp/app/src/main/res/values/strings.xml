@@ -8,6 +8,8 @@
     <string name="title_activity_scrolling">ScrollingActivity</string>
     <string name="time_value_separator">:</string>
     <string name="action_settings">Settings</string>
+    <string name="title_smart">Smart</string>
+    <string name="title_chrono">Chrono</string>
 
     <string name="large_text">
         "Material is the metaphor.\n\n"

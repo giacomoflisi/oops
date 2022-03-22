@@ -1,16 +1,14 @@
-package com.example.wakeapp.ui.clock;
+package com.example.wakeapp.ui.chrono;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import java.util.jar.Attributes;
-
-public class ClockViewModel extends ViewModel{
+public class ChronoViewModel extends ViewModel{
 
     private MutableLiveData<String> mText;
 
-    public ClockViewModel() {
+    public ChronoViewModel() {
         mText = new MutableLiveData<>();
         mText.setValue("TODO: implement a clock view here");
     }
