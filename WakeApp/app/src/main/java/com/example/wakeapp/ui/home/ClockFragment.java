@@ -7,19 +7,19 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import com.example.wakeapp.databinding.FragmentHomeBinding;
+import com.example.wakeapp.databinding.FragmentClockBinding;
 
 public class ClockFragment extends Fragment {
 
     private ClockViewModel clockViewModel;
-    private FragmentHomeBinding binding;
+    private FragmentClockBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         clockViewModel =
                 new ViewModelProvider(this).get(ClockViewModel.class);
 
-        binding = FragmentHomeBinding.inflate(inflater, container, false);
+        binding = FragmentClockBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
 
