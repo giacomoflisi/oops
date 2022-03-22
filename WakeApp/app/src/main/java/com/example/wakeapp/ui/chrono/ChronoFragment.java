@@ -10,12 +10,12 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import com.example.wakeapp.databinding.FragmentClockBinding;
+import com.example.wakeapp.databinding.FragmentChronoBinding;
 
 public class ChronoFragment extends Fragment {
 
     private ChronoViewModel clockViewModel;
-    private FragmentClockBinding binding;
+    private FragmentChronoBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container,
@@ -23,7 +23,7 @@ public class ChronoFragment extends Fragment {
         clockViewModel =
                 new ViewModelProvider(this).get(ChronoViewModel.class);
 
-        binding = FragmentClockBinding.inflate(inflater, container, false);
+        binding = FragmentChronoBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         final TextView textView = binding.textClock;

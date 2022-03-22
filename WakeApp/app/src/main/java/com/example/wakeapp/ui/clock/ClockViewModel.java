@@ -1,4 +1,4 @@
-package com.example.wakeapp.ui.home;
+package com.example.wakeapp.ui.clock;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

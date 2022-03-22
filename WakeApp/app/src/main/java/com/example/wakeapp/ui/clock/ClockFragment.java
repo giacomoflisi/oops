@@ -1,4 +1,4 @@
-package com.example.wakeapp.ui.home;
+package com.example.wakeapp.ui.clock;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

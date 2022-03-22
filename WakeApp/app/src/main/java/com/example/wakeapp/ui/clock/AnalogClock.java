@@ -1,4 +1,4 @@
-package com.example.wakeapp.ui.home;
+package com.example.wakeapp.ui.clock;
 /**
 import android.content.Context;
 import android.graphics.Canvas;

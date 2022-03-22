@@ -10,19 +10,19 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import com.example.wakeapp.databinding.FragmentDashboardBinding;
+import com.example.wakeapp.databinding.FragmentSmartBinding;
 
 public class SmartFragment extends Fragment {
 
     private SmartViewModel smartViewModel;
-    private FragmentDashboardBinding binding;
+    private FragmentSmartBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         smartViewModel =
                 new ViewModelProvider(this).get(SmartViewModel.class);
 
-        binding = FragmentDashboardBinding.inflate(inflater, container, false);
+        binding = FragmentSmartBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         final TextView textView = binding.textDashboard;
