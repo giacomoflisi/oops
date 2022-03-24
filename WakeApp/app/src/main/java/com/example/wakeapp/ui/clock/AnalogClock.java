@@ -284,12 +284,14 @@ public class AnalogClock extends FrameLayout {
         invalidate();
     }
 
+    /** Permetter di impostare il fuso orario (per ora inutilizzato)*/
     public void setTimeZone(String id) {
         mTimeZone = TimeZone.getTimeZone(id);
         mTime.setTimeZone(mTimeZone);
         onTimeChanged();
     }
 
+    /** Permetter la visualizzazione dei secondi (per ora inutilizzata)*/
     public void enableSeconds(boolean enable) {
         mEnableSeconds = enable;
         if (mEnableSeconds) {

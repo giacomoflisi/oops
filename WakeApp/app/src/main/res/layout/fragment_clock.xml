@@ -19,7 +19,18 @@
             <com.example.wakeapp.ui.clock.AnalogClock
                     android:layout_width="243dp"
                     android:layout_height="336dp"
-                    android:layout_gravity="center"/>
+                    android:layout_gravity="center"
+                    android:visibility="visible">
+            </com.example.wakeapp.ui.clock.AnalogClock>
+            <TextClock
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/digitalClock"
+                    android:format12Hour="hh:mm:ss a"
+                    android:format24Hour="hh:mm:ss a"
+                    android:fontFamily="@font/bai_jamjuree_semibold"
+                    android:textSize="50sp" android:gravity="center_horizontal|top"/>
+
         </FrameLayout>
     </LinearLayout>
 </LinearLayout>
