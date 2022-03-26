@@ -191,6 +191,7 @@ public class AnalogClock extends FrameLayout {
     private final ImageView mHourHand;
     private final ImageView mMinuteHand;
     private final ImageView mSecondHand;
+    final ImageView dial;
 
     private Calendar mTime;
     private String mDescFormat;
@@ -213,7 +214,7 @@ public class AnalogClock extends FrameLayout {
 
         // Must call mutate on these instances, otherwise the drawables will blur, because they're
         // sharing their size characteristics with the (smaller) world cities analog clocks.
-        final ImageView dial = new AppCompatImageView(context);
+        dial = new AppCompatImageView(context);
         dial.setImageResource(R.drawable.clock);
         dial.getDrawable().mutate();
         addView(dial);
