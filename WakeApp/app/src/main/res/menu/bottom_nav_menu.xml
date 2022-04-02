@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:tools="http://schemas.android.com/tools" xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
             android:id="@+id/navigation_home"
             android:icon="@drawable/clock_icon"
-            android:title="@string/title_clock"/>
+            android:title="@string/title_clock" android:visibility="visible"/>
 
     <item
             android:id="@+id/navigation_alarms"
             android:icon="@drawable/alarm_icon"
-            android:title="@string/title_alarms"/>
+            android:title="@string/title_alarms" android:visibility="visible"/>
 
     <item
             android:id="@+id/navigation_chrono"
             android:icon="@drawable/crono_icon"
-            android:title="@string/title_chrono"/>
+            android:title="@string/title_chrono" android:visibility="visible"/>
 
     <item
             android:id="@+id/navigation_timer"
             android:icon="@drawable/timer_icon"
-            android:title="@string/title_timer"/>
+            android:title="@string/title_timer" android:visibility="visible"/>
     <item
             android:id="@+id/navigation_smart"
             android:icon="@drawable/smart_icon"
-            android:title="@string/title_smart"/>
+            android:title="@string/title_smart" android:visibility="visible"/>
 
 </menu>
