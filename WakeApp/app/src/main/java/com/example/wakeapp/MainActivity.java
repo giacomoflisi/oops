@@ -45,21 +45,15 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(binding.navView, navController);
     }
 
+    // Open the Options Menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.settings_menu,menu);
         return super.onCreateOptionsMenu(menu);
     }
 
+    // Open the right Option activity
     public boolean onOptionsItemSelected (MenuItem item){
-        /*
-        switch (item.getItemId()){
-            case R.id.action_settings:
-                Intent i = new Intent (this, SettingsActivity.class);
-                startActivity(i);
-        }
-        */
-
         int id = item.getItemId();
         if (id == R.id.action_settings) {
             Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
