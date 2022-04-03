@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,44 +20,68 @@ import org.jetbrains.annotations.NotNull;
 
 public class TimerFragment extends Fragment {
 
+    /** action buttons for starting pausing and resetting the timer */
     private FloatingActionButton mStartButton, mPauseButton, mStopButton;
-    private EditText hoursEditText, minutesEditText, secondsEditText;
 
-    int hoursLeft, minutesLeft, secondsLeft, totalSecondsLeft;
+    private LinearLayout timerLayoutInput, timerLayoutView;
+    /** editText fields and Textviews to display and edit hours seconds and minutes*/
+    private EditText hoursEditText, minutesEditText, secondsEditText;
     TextView hoursLeftText, minutesLeftText, secondsLeftText;
-    //TextView countDownText;
+
+    /** int to keep track of remaining time*/
+    int hoursLeft, minutesLeft, secondsLeft, totalSecondsLeft;
 
     int startTime;
 
     private CountDownTimer timer;
 
+    /** boolean to keep track of the timer state */
     boolean isPaused = false;
+    boolean isRunning = false;
+
+
 
     @SuppressLint("DefaultLocale")
     private void updateRemainingTime(long msUntilFinished){
         totalSecondsLeft = (int) msUntilFinished / 1000;
         hoursLeft = totalSecondsLeft / 3600;
-        minutesLeft = (totalSecondsLeft % 3600) / 6;
+        minutesLeft = (totalSecondsLeft % 3600) / 60;
         secondsLeft = totalSecondsLeft % 60;
 
         hoursLeftText.setText(String.format("%02d", hoursLeft));
         minutesLeftText.setText(String.format("%02d", minutesLeft));
         secondsLeftText.setText(String.format("%02d", secondsLeft));
-
     }
 
+    /** when timer is completed */
     public void finishTimer() {
-        //countDownText.setText(message);
-        mStartButton.setEnabled(true);
-        mPauseButton.setEnabled(false);
-        mStopButton.setEnabled(false);
-        //mRestartButton.setEnabled(false);
 
+        /** set back visibility on input fields */
+        timerLayoutInput.setVisibility(LinearLayout.VISIBLE);
+        timerLayoutView.setVisibility(LinearLayout.INVISIBLE);
+        secondsEditText.requestFocus();
+
+        /** and reset to starting position all the buttons */
+        mStartButton.setEnabled(true);
+        mStartButton.setVisibility(FloatingActionButton.VISIBLE);
+        mPauseButton.setEnabled(false);
+        mPauseButton.setVisibility(FloatingActionButton.INVISIBLE);
+        mStopButton.setEnabled(false);
+        mStopButton.setVisibility(FloatingActionButton.INVISIBLE);
+
+        /** TODO: IMPLEMENT POPUP NOTIFICATION */
     }
 
 
-    //helper function to setup edit input texts
+    /** helper function to setup edit input texts */
     public void setupEditText(View view){
+        //setting up edit whole layout and textview layout to be able to manage their visibility
+        timerLayoutInput = view.findViewById(R.id.timer_text_input);
+        timerLayoutView = view.findViewById(R.id.timer_text_view);
+        //obscuring the view because we want to focus on the input text
+        timerLayoutView.setVisibility(LinearLayout.INVISIBLE);
+
+
         hoursEditText = view.findViewById(R.id.hours);
         minutesEditText = view.findViewById(R.id.minutes);
         secondsEditText = view.findViewById(R.id.seconds);
@@ -72,6 +97,7 @@ public class TimerFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {}
 
+            /** change edittext focus if we reach lenght 2 */
             @Override
             public void afterTextChanged(Editable s) {
                 if (s.length() == 2){
@@ -96,29 +122,54 @@ public class TimerFragment extends Fragment {
         });
 
     }
-    //helper function to setup button functionality
+
+    /** helper function to setup button functionality */
     public void setupTimerButtons(@NotNull View view) {
         mStartButton = view.findViewById(R.id.start_button);
         mPauseButton = view.findViewById(R.id.pause_button);
         mStopButton = view.findViewById(R.id.stop_button);
 
+        mStartButton.setEnabled(true);
+        mStartButton.setVisibility(FloatingActionButton.VISIBLE);
+
+        mPauseButton.setEnabled(false);
+        mPauseButton.setVisibility(FloatingActionButton.INVISIBLE);
+        mStopButton.setEnabled(false);
+        mStopButton.setVisibility(FloatingActionButton.INVISIBLE);
+
+        /** START BUTTON IMPLEMENTATION */
         mStartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                //obscuring the input-field and enabling the timer view
+                timerLayoutInput.setVisibility(LinearLayout.INVISIBLE);
+                timerLayoutView.setVisibility(LinearLayout.VISIBLE);
+
+                isRunning = true;
                 //start the timer when start is clicked
-                startTime = totalSecondsLeft;
+                startTime = 0;
 
                 //multiply because we convert everything to milliseconds
-                startTime += Integer.parseInt(secondsEditText.getText().toString())*1000;
-                startTime += Integer.parseInt(minutesEditText.getText().toString())*1000 * 60;
-                startTime += Integer.parseInt(hoursEditText.getText().toString())*1000 * 60 * 60;
-
+                if (isPaused){
+                    timer.cancel();
+                    startTime += Integer.parseInt(secondsLeftText.getText().toString())*1000;
+                    startTime += Integer.parseInt(minutesLeftText.getText().toString())*1000 * 60;
+                    startTime += Integer.parseInt(hoursLeftText.getText().toString())*1000 * 60 * 60;
+                } else {
+                    startTime += Integer.parseInt(secondsEditText.getText().toString()) * 1000;
+                    startTime += Integer.parseInt(minutesEditText.getText().toString()) * 1000 * 60;
+                    startTime += Integer.parseInt(hoursEditText.getText().toString()) * 1000 * 60 * 60;
+                }
 
                 //setting up button visibility for the current state
                 mStartButton.setEnabled(false);
+                mStartButton.setVisibility(FloatingActionButton.INVISIBLE);
+
                 mPauseButton.setEnabled(true);
+                mPauseButton.setVisibility(FloatingActionButton.VISIBLE);
                 mStopButton.setEnabled(true);
-                //mRestartButton.setEnabled(true); //TODO: implement restart button (?)
+                mStopButton.setVisibility(FloatingActionButton.VISIBLE);
 
                 //starting the timer from startTime with 1 second interval == 1000ms
                 timer = new CountDownTimer(startTime, 1000) {
@@ -137,49 +188,53 @@ public class TimerFragment extends Fragment {
             }
         });
 
+        /** PAUSE BUTTON IMPLEMENTATION */
         mPauseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //pause the timer when this is clicked
                 isPaused = !isPaused; //switch the paused state
                 if (isPaused){
-                    mStartButton.setEnabled(true);
-                    mPauseButton.setEnabled(false);
-                    timer.cancel();
-                    //countDownText.setText("Paused");
-                } else {
-                    timer = new CountDownTimer((long) totalSecondsLeft * 1000, 1000) {
-                        @Override
-                        public void onTick(long msUntilFinished) {
-                            updateRemainingTime(msUntilFinished);
-                        }
 
-                        @Override
-                        public void onFinish() {
-                            //finishTimer("Done");
-                            finishTimer();
-                        }
-                    }.start();
+                    timerLayoutInput.setVisibility(LinearLayout.INVISIBLE);
+                    timerLayoutView.setVisibility(LinearLayout.VISIBLE);
+
+                    mStartButton.setEnabled(true);
+                    mStartButton.setVisibility(FloatingActionButton.VISIBLE);
+                    mPauseButton.setEnabled(false);
+                    mPauseButton.setVisibility(FloatingActionButton.INVISIBLE);
+                    mStopButton.setEnabled(false);
+                    mStopButton.setVisibility(FloatingActionButton.INVISIBLE);
+
+                    timer.cancel();
                 }
             }
         });
 
+        /** STOP aka RESET BUTTON IMPLEMENTATION */
         mStopButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //stop/cancel the timer when this is clicked
                 timer.cancel();
+
+
+                timerLayoutInput.setVisibility(LinearLayout.VISIBLE);
+                timerLayoutView.setVisibility(LinearLayout.INVISIBLE);
+                secondsEditText.requestFocus();
+
+                //resetting the textview
+                hoursLeftText.setText("00");
+                minutesLeftText.setText("00");
+                secondsLeftText.setText("00");
+
                 //finishTimer("Cancelled");
                 finishTimer();
             }
         });
     }
 
-    @Override
-    public void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
+    /** whenever the fragment is called by the main activity */
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
@@ -192,8 +247,12 @@ public class TimerFragment extends Fragment {
     }
 
     @Override
+    public void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
     }
-
 }
