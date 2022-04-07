@@ -12,6 +12,8 @@
     <string name="digital_tag">Digital</string>
     <string name="analog_tag">Analog</string>
     <string name="default_string"> </string>
+    <string name="timer_channel">TimerChannel</string>
+    <string name="alarm_channel">AlarmChannel</string>
 
     <string name="large_text">
         "Material is the metaphor.\n\n"

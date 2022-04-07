@@ -1,7 +1,12 @@
 package com.example.wakeapp;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,6 +22,10 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import com.example.wakeapp.databinding.ActivityMainBinding;
+
+import java.sql.Array;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -43,6 +52,8 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
+
+        initNotificationChannels();
     }
 
     // Open the Options Menu
@@ -70,5 +81,38 @@ public class MainActivity extends AppCompatActivity {
                 .unregisterOnSharedPreferenceChangeListener((SharedPreferences.OnSharedPreferenceChangeListener) this);
     }
 
+    private void initNotificationChannels() {
+        //creating notification channel only for API 26+ which means android oreo 8.0+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+
+            String timerChannelID = "timer_channel";
+            CharSequence timerName = getString(R.string.timer_channel);
+            NotificationChannel timerChannel =
+                    new NotificationChannel(timerChannelID, timerName, importance);
+
+            String alarmChannelID = "alarm_channel";
+            CharSequence alarmName = getString(R.string.alarm_channel);
+            NotificationChannel alarmChannel =
+                    new NotificationChannel(alarmChannelID, alarmName, importance);
+
+            List<NotificationChannel> notificationChannelList = new ArrayList<>();
+            notificationChannelList.add(timerChannel);
+            notificationChannelList.add(alarmChannel);
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            // NotificationManager notificationManager = (NotificationManager) getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
+
+            NotificationManager mNotificationManager = getSystemService(NotificationManager.class);
+
+            //mNotificationManager.createNotificationChannel(timerChannel);
+            //mNotificationManager.createNotificationChannel(alarmChannel);
+
+            if (mNotificationManager != null){
+                mNotificationManager.createNotificationChannels(notificationChannelList);
+            }
+        }
+    }
 
 }

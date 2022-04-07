@@ -1,8 +1,15 @@
 package com.example.wakeapp.ui.timer;
 
 import android.annotation.SuppressLint;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.content.Context;
+import android.hardware.SensorManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.provider.SyncStateContract;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -13,7 +20,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.NotificationCompat;
 import androidx.fragment.app.Fragment;
+import com.example.wakeapp.MainActivity;
 import com.example.wakeapp.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import org.jetbrains.annotations.NotNull;
@@ -39,6 +48,7 @@ public class TimerFragment extends Fragment {
     boolean isPaused = false;
     boolean isRunning = false;
 
+    private final String timerChannelID = "timer_channel";
 
 
     @SuppressLint("DefaultLocale")
@@ -55,6 +65,15 @@ public class TimerFragment extends Fragment {
 
     /** when timer is completed */
     public void finishTimer() {
+
+        /* this should create a popup notification once the timer finishes
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
+                .setSmallIcon(R.drawable.ic_baseline_timer_24)
+                .setContentTitle("Timer")
+                .setContentText("time is up!")
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+
+         */
 
         /** set back visibility on input fields */
         timerLayoutInput.setVisibility(LinearLayout.VISIBLE);
