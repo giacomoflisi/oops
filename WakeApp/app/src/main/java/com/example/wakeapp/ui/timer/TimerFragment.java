@@ -39,10 +39,13 @@ public class TimerFragment extends Fragment {
 
     /** int to keep track of remaining time*/
     int hoursLeft, minutesLeft, secondsLeft, totalSecondsLeft;
+    float progress;
 
-    int startTime;
+    int startTime, totalTime;
 
     private CountDownTimer timer;
+
+    CircularProgressBar progressBar;
 
     /** boolean to keep track of the timer state */
     boolean isPaused = false;
@@ -50,9 +53,9 @@ public class TimerFragment extends Fragment {
 
     private final String timerChannelID = "timer_channel";
 
-
     @SuppressLint("DefaultLocale")
     private void updateRemainingTime(long msUntilFinished){
+
         totalSecondsLeft = (int) msUntilFinished / 1000;
         hoursLeft = totalSecondsLeft / 3600;
         minutesLeft = (totalSecondsLeft % 3600) / 60;
@@ -61,11 +64,18 @@ public class TimerFragment extends Fragment {
         hoursLeftText.setText(String.format("%02d", hoursLeft));
         minutesLeftText.setText(String.format("%02d", minutesLeft));
         secondsLeftText.setText(String.format("%02d", secondsLeft));
+
+        progress = (float) (msUntilFinished - 1000) / (float) totalTime * 100;
+        // casting to int to round down the percentage
+        progress = (int) progress;
+        System.out.println(progress);
+        progressBar.setProgressWithAnimation(progress);
     }
 
     /** when timer is completed */
     public void finishTimer() {
 
+        /** TODO: IMPLEMENT POPUP NOTIFICATION */
         /* this should create a popup notification once the timer finishes
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.drawable.ic_baseline_timer_24)
@@ -74,6 +84,9 @@ public class TimerFragment extends Fragment {
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
          */
+        /** progress bar completed returns to zer0 percent */
+        progressBar.setProgressWithAnimation(0);
+        //progressBar.setVisibility(View.INVISIBLE);
 
         /** set back visibility on input fields */
         timerLayoutInput.setVisibility(LinearLayout.VISIBLE);
@@ -87,8 +100,6 @@ public class TimerFragment extends Fragment {
         mPauseButton.setVisibility(FloatingActionButton.INVISIBLE);
         mStopButton.setEnabled(false);
         mStopButton.setVisibility(FloatingActionButton.INVISIBLE);
-
-        /** TODO: IMPLEMENT POPUP NOTIFICATION */
     }
 
 
@@ -179,6 +190,7 @@ public class TimerFragment extends Fragment {
                     startTime += Integer.parseInt(secondsEditText.getText().toString()) * 1000;
                     startTime += Integer.parseInt(minutesEditText.getText().toString()) * 1000 * 60;
                     startTime += Integer.parseInt(hoursEditText.getText().toString()) * 1000 * 60 * 60;
+                    totalTime = startTime;
                 }
 
                 //setting up button visibility for the current state
@@ -237,6 +249,8 @@ public class TimerFragment extends Fragment {
                 //stop/cancel the timer when this is clicked
                 timer.cancel();
 
+                progressBar.setProgressWithAnimation(0);
+
 
                 timerLayoutInput.setVisibility(LinearLayout.VISIBLE);
                 timerLayoutView.setVisibility(LinearLayout.INVISIBLE);
@@ -260,8 +274,11 @@ public class TimerFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_timer, container, false);
 
         //calling helper function to setup text and timer buttons
+        progressBar = view.findViewById(R.id.circular_progress_bar);
+        progressBar.setStrokeWidth(50f);
         setupEditText(view);
         setupTimerButtons(view);
+
         return view;
     }
 
