@@ -20,12 +20,16 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.NotificationChannelCompat;
 import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
 import com.example.wakeapp.MainActivity;
 import com.example.wakeapp.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Objects;
 
 public class TimerFragment extends Fragment {
 
@@ -53,6 +57,20 @@ public class TimerFragment extends Fragment {
 
     private final String timerChannelID = "timer_channel";
 
+    private Context mContext;
+
+    @Override
+    public void onAttach(@NotNull Context context) {
+        super.onAttach(context);
+        mContext = context;
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mContext = null;
+    }
+
     @SuppressLint("DefaultLocale")
     private void updateRemainingTime(long msUntilFinished){
 
@@ -72,18 +90,36 @@ public class TimerFragment extends Fragment {
         progressBar.setProgressWithAnimation(progress);
     }
 
+    private void createNotificationChannel(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel(timerChannelID, timerChannelID, importance);
+
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            NotificationManager notificationManager =
+                    (NotificationManager) Objects.requireNonNull(getActivity()).getSystemService(Context.NOTIFICATION_SERVICE);
+            notificationManager.createNotificationChannel(channel);
+        }
+
+    }
+
     /** when timer is completed */
     public void finishTimer() {
 
-        /** TODO: IMPLEMENT POPUP NOTIFICATION */
-        /* this should create a popup notification once the timer finishes
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
-                .setSmallIcon(R.drawable.ic_baseline_timer_24)
+        // this should create a popup notification once the timer finishes
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(
+                Objects.requireNonNull(getActivity()).getApplicationContext(),
+                timerChannelID)
+                .setSmallIcon(R.drawable.timer_icon)
                 .setContentTitle("Timer")
-                .setContentText("time is up!")
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+                .setContentText("Time's up!")
+                .setPriority(NotificationCompat.PRIORITY_HIGH);
 
-         */
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(mContext);
+        notificationManager.notify(1, builder.build());
+
+
         /** progress bar completed returns to zer0 percent */
         progressBar.setProgressWithAnimation(0);
         //progressBar.setVisibility(View.INVISIBLE);
@@ -278,6 +314,7 @@ public class TimerFragment extends Fragment {
         progressBar.setStrokeWidth(50f);
         setupEditText(view);
         setupTimerButtons(view);
+        createNotificationChannel();
 
         return view;
     }
