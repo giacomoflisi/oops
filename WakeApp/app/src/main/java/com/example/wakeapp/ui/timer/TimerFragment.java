@@ -4,8 +4,13 @@ import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.hardware.SensorManager;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -24,6 +29,7 @@ import androidx.core.app.NotificationChannelCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavDeepLinkBuilder;
 import com.example.wakeapp.MainActivity;
 import com.example.wakeapp.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -33,6 +39,15 @@ import java.util.Objects;
 
 public class TimerFragment extends Fragment {
 
+    // TODO: add notification with time and a pause button
+    // TODO: fix alarm sounds on timer finished
+    // TODO: create intent to open the timer fragment from the notification
+    // TODO: fix bugs in NULL input fields
+    // TODO: fix bug PLAY -> PAUSE -> PLAY -> STOP
+    // TODO: add a button to clear the input, setting it to 00:00:00
+
+    Uri notification;
+    Ringtone ringtone;
     /** action buttons for starting pausing and resetting the timer */
     private FloatingActionButton mStartButton, mPauseButton, mStopButton;
 
@@ -59,6 +74,9 @@ public class TimerFragment extends Fragment {
 
     private Context mContext;
 
+    PendingIntent pendingIntent;
+    Intent intent;
+
     @Override
     public void onAttach(@NotNull Context context) {
         super.onAttach(context);
@@ -69,6 +87,18 @@ public class TimerFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mContext = null;
+    }
+
+    // Create an explicit intent
+    public void setupIntent(){
+        intent = new Intent(mContext, TimerFragment.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        pendingIntent = PendingIntent.getActivity(mContext, 0, intent, PendingIntent.FLAG_IMMUTABLE);
+    }
+
+    private void setupRingtone(){
+        notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        ringtone = RingtoneManager.getRingtone(mContext, notification);
     }
 
     @SuppressLint("DefaultLocale")
@@ -114,11 +144,14 @@ public class TimerFragment extends Fragment {
                 .setSmallIcon(R.drawable.timer_icon)
                 .setContentTitle("Timer")
                 .setContentText("Time's up!")
-                .setPriority(NotificationCompat.PRIORITY_HIGH);
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setContentIntent(pendingIntent)
+                .setAutoCancel(true);
 
-        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(mContext);
+        NotificationManagerCompat notificationManager;
+        notificationManager = NotificationManagerCompat.from(mContext);
         notificationManager.notify(1, builder.build());
-
+        ringtone.play();
 
         /** progress bar completed returns to zer0 percent */
         progressBar.setProgressWithAnimation(0);
@@ -315,6 +348,8 @@ public class TimerFragment extends Fragment {
         setupEditText(view);
         setupTimerButtons(view);
         createNotificationChannel();
+        setupIntent();
+        setupRingtone();
 
         return view;
     }
