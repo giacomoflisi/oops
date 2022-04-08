@@ -5,6 +5,7 @@
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.23981481481481481" />
         <entry key="../../.gradle/caches/transforms-3/b6f0d187be5c9a123a53118d219dfb77/transformed/material-1.5.0/res/drawable/ic_clock_black_24dp.xml" value="0.26666666666666666" />
+        <entry key="app/src/main/res/drawable-anydpi/ic_stop_button.xml" value="0.12395833333333334" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.23981481481481481" />
         <entry key="app/src/main/res/drawable/ic_baseline_access_alarm_24.xml" value="0.24444444444444444" />
         <entry key="app/src/main/res/drawable/ic_baseline_add_circle_24.xml" value="0.24444444444444444" />
@@ -12,6 +13,9 @@
         <entry key="app/src/main/res/drawable/ic_baseline_cancel_24.xml" value="0.24444444444444444" />
         <entry key="app/src/main/res/drawable/ic_baseline_delete_24.xml" value="0.24444444444444444" />
         <entry key="app/src/main/res/drawable/ic_baseline_fitness_center_24.xml" value="0.24444444444444444" />
+        <entry key="app/src/main/res/drawable/ic_baseline_pause_24.xml" value="0.24444444444444444" />
+        <entry key="app/src/main/res/drawable/ic_baseline_play_arrow_24.xml" value="0.24444444444444444" />
+        <entry key="app/src/main/res/drawable/ic_baseline_stop_24.xml" value="0.24444444444444444" />
         <entry key="app/src/main/res/drawable/ic_dashboard_black_24dp.xml" value="0.23981481481481481" />
         <entry key="app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.23981481481481481" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.23981481481481481" />
