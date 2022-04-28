@@ -3,19 +3,28 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Documenti/Unimore/PROGRAMMAZIONE AD OGGETTI/Project - WAKE APP/WakeApp/app/src/main/res/drawable/ic_baseline_access_alarm_24.xml" value="0.10811965811965812" />
         <entry key="..\:/Documenti/Unimore/PROGRAMMAZIONE AD OGGETTI/Project - WAKE APP/WakeApp/app/src/main/res/drawable/ic_baseline_add_circle_24.xml" value="0.22521367521367522" />
         <entry key="..\:/Documenti/Unimore/PROGRAMMAZIONE AD OGGETTI/Project - WAKE APP/WakeApp/app/src/main/res/drawable/ic_baseline_fitness_center_24.xml" value="0.22521367521367522" />
         <entry key="..\:/Documenti/Unimore/PROGRAMMAZIONE AD OGGETTI/Project - WAKE APP/WakeApp/app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.22521367521367522" />
         <entry key="..\:/Documenti/Unimore/PROGRAMMAZIONE AD OGGETTI/Project - WAKE APP/WakeApp/app/src/main/res/drawable/ic_launcher_background.xml" value="0.22521367521367522" />
+        <entry key="..\:/Documenti/Unimore/PROGRAMMAZIONE AD OGGETTI/Project - WAKE APP/WakeApp/app/src/main/res/drawable/ic_looks_one_black_24dp.xml" value="0.22435897435897437" />
+        <entry key="..\:/Documenti/Unimore/PROGRAMMAZIONE AD OGGETTI/Project - WAKE APP/WakeApp/app/src/main/res/drawable/ic_repeat_black_24dp.xml" value="0.1" />
         <entry key="..\:/Documenti/Unimore/PROGRAMMAZIONE AD OGGETTI/Project - WAKE APP/WakeApp/app/src/main/res/layout-w1240dp/content_scrolling.xml" value="0.16599732262382866" />
         <entry key="..\:/Documenti/Unimore/PROGRAMMAZIONE AD OGGETTI/Project - WAKE APP/WakeApp/app/src/main/res/layout-w936dp/content_scrolling.xml" value="0.19375" />
+        <entry key="..\:/Documenti/Unimore/PROGRAMMAZIONE AD OGGETTI/Project - WAKE APP/WakeApp/app/src/main/res/layout/activity_createalarm.xml" value="0.1329059829059829" />
         <entry key="..\:/Documenti/Unimore/PROGRAMMAZIONE AD OGGETTI/Project - WAKE APP/WakeApp/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/Documenti/Unimore/PROGRAMMAZIONE AD OGGETTI/Project - WAKE APP/WakeApp/app/src/main/res/layout/activity_ring.xml" value="0.2111111111111111" />
         <entry key="..\:/Documenti/Unimore/PROGRAMMAZIONE AD OGGETTI/Project - WAKE APP/WakeApp/app/src/main/res/layout/activity_settings.xml" value="0.13760683760683762" />
-        <entry key="..\:/Documenti/Unimore/PROGRAMMAZIONE AD OGGETTI/Project - WAKE APP/WakeApp/app/src/main/res/layout/fragment_alarms.xml" value="0.1015625" />
+        <entry key="..\:/Documenti/Unimore/PROGRAMMAZIONE AD OGGETTI/Project - WAKE APP/WakeApp/app/src/main/res/layout/fragment_alarms.xml" value="0.264" />
         <entry key="..\:/Documenti/Unimore/PROGRAMMAZIONE AD OGGETTI/Project - WAKE APP/WakeApp/app/src/main/res/layout/fragment_chrono.xml" value="0.4" />
         <entry key="..\:/Documenti/Unimore/PROGRAMMAZIONE AD OGGETTI/Project - WAKE APP/WakeApp/app/src/main/res/layout/fragment_clock.xml" value="0.3055555555555556" />
+        <entry key="..\:/Documenti/Unimore/PROGRAMMAZIONE AD OGGETTI/Project - WAKE APP/WakeApp/app/src/main/res/layout/fragment_createalarm.xml" value="0.2230769230769231" />
         <entry key="..\:/Documenti/Unimore/PROGRAMMAZIONE AD OGGETTI/Project - WAKE APP/WakeApp/app/src/main/res/layout/fragment_dashboard.xml" value="0.1" />
         <entry key="..\:/Documenti/Unimore/PROGRAMMAZIONE AD OGGETTI/Project - WAKE APP/WakeApp/app/src/main/res/layout/fragment_home.xml" value="0.264" />
+        <entry key="..\:/Documenti/Unimore/PROGRAMMAZIONE AD OGGETTI/Project - WAKE APP/WakeApp/app/src/main/res/layout/fragment_listalarms_recyclerview.xml" value="0.1" />
+        <entry key="..\:/Documenti/Unimore/PROGRAMMAZIONE AD OGGETTI/Project - WAKE APP/WakeApp/app/src/main/res/layout/fragment_timer.xml" value="0.1329059829059829" />
+        <entry key="..\:/Documenti/Unimore/PROGRAMMAZIONE AD OGGETTI/Project - WAKE APP/WakeApp/app/src/main/res/layout/item_alarm.xml" value="0.7144578313253012" />
         <entry key="..\:/Documenti/Unimore/PROGRAMMAZIONE AD OGGETTI/Project - WAKE APP/WakeApp/app/src/main/res/menu/bottom_nav_menu.xml" value="0.25885416666666666" />
         <entry key="..\:/Documenti/Unimore/PROGRAMMAZIONE AD OGGETTI/Project - WAKE APP/WakeApp/app/src/main/res/menu/settings_menu.xml" value="0.15042735042735042" />
         <entry key="..\:/Documenti/Unimore/PROGRAMMAZIONE AD OGGETTI/Project - WAKE APP/WakeApp/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.22521367521367522" />

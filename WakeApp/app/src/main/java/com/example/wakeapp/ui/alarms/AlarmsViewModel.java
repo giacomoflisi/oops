@@ -1,19 +1,35 @@
 package com.example.wakeapp.ui.alarms;
 
+import android.app.Application;
+import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.AndroidViewModel;
 
-public class AlarmsViewModel extends ViewModel {
+import java.util.List;
 
-    private MutableLiveData<String> mText;
+public class AlarmsViewModel extends AndroidViewModel {
 
-    public AlarmsViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("TODO: implement alarms setup with scroller and plus button");
+    private AlarmRepository alarmRepository;
+    private LiveData<List<Alarm>> alarmsLiveData;
+
+    public AlarmsViewModel(@NonNull Application application) {
+        super(application);
+
+        alarmRepository = new AlarmRepository(application);
+        alarmsLiveData = alarmRepository.getAlarmsLiveData();
     }
 
-    public LiveData<String> getText() {
-        return mText;
+    public void update(Alarm alarm) {
+        alarmRepository.update(alarm);
     }
+
+    public void deleteAlarm (Alarm alarm){
+        alarmRepository.delete(alarm);
+    }
+
+    public LiveData<List<Alarm>> getAlarmsLiveData() {
+        return alarmsLiveData;
+    }
+
 }

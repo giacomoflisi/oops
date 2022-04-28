@@ -30,14 +30,14 @@
                     android:format24Hour="hh:mm:ss a"
                     android:fontFamily="@font/bai_jamjuree_semibold"
                     android:textSize="50sp" android:gravity="center"/>
+            <Switch
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/switch_Analog_Digital"
+                    android:layout_gravity="bottom|right" android:height="48dp"
+                    android:textOff="@string/digital_tag" android:textOn="@string/analog_tag" android:textSize="16sp"
+                    android:fontFamily="@font/bai_jamjuree_semibold" android:showText="true"
+            />
 
         </FrameLayout>
-        <Switch
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/switch_Analog_Digital"
-                android:layout_gravity="bottom|right" android:height="48dp"
-                android:textOff="@string/digital_tag" android:textOn="@string/analog_tag" android:textSize="16sp"
-                android:fontFamily="@font/bai_jamjuree_semibold" android:showText="true"
-        />
     </LinearLayout>
 </LinearLayout>

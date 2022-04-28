@@ -36,8 +36,8 @@
             android:layout_height="60dp"
             android:src="@drawable/chrono_screen" android:id="@+id/chrono_screen"
             app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/step_screen" android:layout_marginBottom="72dp"
-            android:foregroundGravity="center_horizontal"/>
+            android:foregroundGravity="center_horizontal" app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="4dp"/>
     <Chronometer
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -50,8 +50,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:fontFamily="@font/bai_jamjuree_semibold" android:textSize="25sp"
-            app:layout_constraintBottom_toTopOf="@+id/step_screen" android:layout_marginBottom="72dp"
-            android:gravity="center_horizontal"/>
+            android:gravity="center_horizontal" app:layout_constraintTop_toTopOf="parent"
+    />
     <ImageButton
             android:src="@drawable/pause_button"
             android:layout_width="wrap_content"

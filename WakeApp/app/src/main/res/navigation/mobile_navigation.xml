@@ -34,4 +34,6 @@
             android:name="com.example.wakeapp.ui.timer.TimerFragment"
             android:label="@string/title_timer"
             tools:layout="@layout/fragment_timer"/>
+
+
 </navigation>
