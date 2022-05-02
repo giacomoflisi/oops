@@ -23,6 +23,10 @@
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             />
+            <ImageButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" app:srcCompat="@drawable/ic_baseline_delete_24"
+                    android:id="@+id/deleteAllAlarmsButton"/>
             <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/fragment_listalarms_recylerView"
                     android:layout_width="match_parent"

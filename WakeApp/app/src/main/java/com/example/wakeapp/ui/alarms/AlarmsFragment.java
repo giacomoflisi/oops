@@ -39,7 +39,7 @@ public class AlarmsFragment extends Fragment implements OnToggleAlarmListener{
     private AlarmsViewModel alarmsViewModel;
     private RecyclerView alarmsRecyclerView;
     private Button addAlarm;
-    private Button deleteAlarm;
+    private ImageButton deleteAllAlarms;
     private FragmentAlarmsBinding binding;
     private AlarmRepository alarmRepository;
 
@@ -98,6 +98,20 @@ public class AlarmsFragment extends Fragment implements OnToggleAlarmListener{
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), CreateAlarmActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        //----------------deleteAllAlarms button--------------------------
+        deleteAllAlarms = view.findViewById(R.id.deleteAllAlarmsButton);
+        deleteAllAlarms.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                for(int i=0;i<alarmRecyclerViewAdapter.getItemCount();i++){
+                    Alarm alarm = alarmRecyclerViewAdapter.getAlarmAtPosition(i);
+                    alarm.cancelAlarm(getContext());
+                }
+                alarmsViewModel.deleteAllAlarms();
+                alarmRecyclerViewAdapter.notifyItemRangeRemoved(0,alarmRecyclerViewAdapter.getItemCount());
             }
         });
 
