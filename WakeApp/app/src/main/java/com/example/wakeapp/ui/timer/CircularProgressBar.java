@@ -124,9 +124,6 @@ public class CircularProgressBar extends View {
         foregroundPaint.setColor(color);
         foregroundPaint.setStyle(Paint.Style.STROKE);
         foregroundPaint.setStrokeWidth(strokeWidth);
-
-        //mDotFill.setColor(color);
-        //mDotRadius = 20;
     }
 
     @Override
@@ -146,21 +143,6 @@ public class CircularProgressBar extends View {
         canvas.drawOval(rectF, backgroundPaint);
         float angle = 360 * (progress) / max;
         canvas.drawArc(rectF, startAngle, angle, false, foregroundPaint);
-
-
-        /*
-        // Compute the size and location of the circle to be drawn.
-        final int xCenter = getWidth() / 2;
-        final int yCenter = getHeight() / 2;
-        final float radius = Math.min(xCenter, yCenter);// - mRadiusOffset;
-
-        // Draw a red dot to indicate current progress through the timer.
-        final double dotAngleRadians = Math.toRadians(angle);
-        final float dotX = xCenter + (float) (radius * Math.cos(dotAngleRadians));
-        final float dotY = yCenter + (float) (radius * Math.sin(dotAngleRadians));
-        canvas.drawCircle(dotX, dotY, mDotRadius, mDotFill);
-
-         */
     }
 
     public int lightenColor(int color, float factor) {

@@ -34,6 +34,8 @@ import com.example.wakeapp.MainActivity;
 import com.example.wakeapp.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import org.jetbrains.annotations.NotNull;
+import static com.example.wakeapp.ui.alarms.SnoozeAlarmReceiver.ACTION_SNOOZE;
+import static android.app.Notification.EXTRA_NOTIFICATION_ID;
 
 import java.util.Objects;
 
@@ -71,6 +73,10 @@ public class TimerFragment extends Fragment {
     boolean isRunning = false;
 
     private final String timerChannelID = "timer_channel";
+    NotificationChannel channel;
+    NotificationManagerCompat notificationManager;
+    NotificationCompat.Builder builder;
+    int importance = NotificationManager.IMPORTANCE_DEFAULT;
 
     private Context mContext;
 
@@ -94,6 +100,12 @@ public class TimerFragment extends Fragment {
         intent = new Intent(mContext, TimerFragment.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         pendingIntent = PendingIntent.getActivity(mContext, 0, intent, PendingIntent.FLAG_IMMUTABLE);
+
+        Intent snoozeIntent = new Intent(mContext, TimerFragment.class);
+        snoozeIntent.setAction(ACTION_SNOOZE);
+        snoozeIntent.putExtra(EXTRA_NOTIFICATION_ID, 0);
+        PendingIntent snoozePendingIntent =
+                PendingIntent.getBroadcast(mContext, 0, snoozeIntent, 0);
     }
 
     private void setupRingtone(){
@@ -116,53 +128,71 @@ public class TimerFragment extends Fragment {
         progress = (float) (msUntilFinished - 1000) / (float) totalTime * 100;
         // casting to int to round down the percentage
         progress = (int) progress;
-        System.out.println(progress);
         progressBar.setProgressWithAnimation(progress);
+        builder.setProgress(100, (int) progress, false);
+        builder.setContentText(totalSecondsLeft+"s left");
+        notificationManager.notify(1, builder.build());
+    }
+
+    private void createProgressNotification() {
+        notificationManager = NotificationManagerCompat.from(mContext);
+
+        builder = new NotificationCompat.Builder(
+                Objects.requireNonNull(getActivity()).getApplicationContext(),
+                timerChannelID);
+
+        builder.setSmallIcon(R.drawable.timer_icon)
+                .setContentTitle("Timer")
+                .setContentText("Running")
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setAutoCancel(true);
+        builder.setProgress(100, 0, false);
+        notificationManager.notify(1, builder.build());
     }
 
     private void createNotificationChannel(){
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            int importance = NotificationManager.IMPORTANCE_DEFAULT;
-            NotificationChannel channel = new NotificationChannel(timerChannelID, timerChannelID, importance);
-
-            // Register the channel with the system; you can't change the importance
-            // or other notification behaviors after this
-            NotificationManager notificationManager =
-                    (NotificationManager) Objects.requireNonNull(getActivity()).getSystemService(Context.NOTIFICATION_SERVICE);
-            notificationManager.createNotificationChannel(channel);
-        }
-
+        channel = new NotificationChannel(timerChannelID, timerChannelID, importance);
+        // Register the channel with the system; you can't change the importance
+        // or other notification behaviors after this
+        NotificationManager notificationManager =
+                (NotificationManager) Objects.requireNonNull(getActivity()).getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.createNotificationChannel(channel);
     }
 
     /** when timer is completed */
     public void finishTimer() {
 
         // this should create a popup notification once the timer finishes
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(
+        NotificationCompat.Builder builderFinish = new NotificationCompat.Builder(
                 Objects.requireNonNull(getActivity()).getApplicationContext(),
-                timerChannelID)
-                .setSmallIcon(R.drawable.timer_icon)
+                timerChannelID);
+        builder.setSmallIcon(R.drawable.timer_icon)
                 .setContentTitle("Timer")
                 .setContentText("Time's up!")
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setContentIntent(pendingIntent)
+                //.addAction(R.drawable.ic_baseline_snooze_24, "stop", snoozePendingIntent)
+                .setProgress(0, 0, false)
                 .setAutoCancel(true);
+
+
+
 
         NotificationManagerCompat notificationManager;
         notificationManager = NotificationManagerCompat.from(mContext);
         notificationManager.notify(1, builder.build());
         ringtone.play();
 
-        /** progress bar completed returns to zer0 percent */
+        /* progress bar completed returns to zer0 percent */
         progressBar.setProgressWithAnimation(0);
         //progressBar.setVisibility(View.INVISIBLE);
 
-        /** set back visibility on input fields */
+        /* set back visibility on input fields */
         timerLayoutInput.setVisibility(LinearLayout.VISIBLE);
         timerLayoutView.setVisibility(LinearLayout.INVISIBLE);
         secondsEditText.requestFocus();
 
-        /** and reset to starting position all the buttons */
+        /* and reset to starting position all the buttons */
         mStartButton.setEnabled(true);
         mStartButton.setVisibility(FloatingActionButton.VISIBLE);
         mPauseButton.setEnabled(false);
@@ -236,11 +266,12 @@ public class TimerFragment extends Fragment {
         mStopButton.setEnabled(false);
         mStopButton.setVisibility(FloatingActionButton.INVISIBLE);
 
-        /** START BUTTON IMPLEMENTATION */
+        /* START BUTTON IMPLEMENTATION */
         mStartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
+                createProgressNotification();
                 //obscuring the input-field and enabling the timer view
                 timerLayoutInput.setVisibility(LinearLayout.INVISIBLE);
                 timerLayoutView.setVisibility(LinearLayout.VISIBLE);
@@ -288,7 +319,7 @@ public class TimerFragment extends Fragment {
             }
         });
 
-        /** PAUSE BUTTON IMPLEMENTATION */
+        /* PAUSE BUTTON IMPLEMENTATION */
         mPauseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
