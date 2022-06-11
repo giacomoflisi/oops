@@ -1,57 +1,58 @@
 package com.example.wakeapp.ui.timer;
 
 import android.annotation.SuppressLint;
-import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.hardware.SensorManager;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.provider.SyncStateContract;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.app.NotificationChannelCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavDeepLinkBuilder;
-import com.example.wakeapp.MainActivity;
 import com.example.wakeapp.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import org.jetbrains.annotations.NotNull;
-import static com.example.wakeapp.ui.alarms.SnoozeAlarmReceiver.ACTION_SNOOZE;
-import static android.app.Notification.EXTRA_NOTIFICATION_ID;
 
 import java.util.Objects;
 
+import static android.app.Notification.EXTRA_NOTIFICATION_ID;
+import static com.example.wakeapp.ui.alarms.SnoozeAlarmReceiver.ACTION_SNOOZE;
+
 public class TimerFragment extends Fragment {
 
-    // TODO: add notification with time and a pause button
-    // TODO: fix alarm sounds on timer finished
     // TODO: create intent to open the timer fragment from the notification
+    // TODO: add a pause and stop button to the notification
+
     // TODO: fix bugs in NULL input fields
-    // TODO: fix bug PLAY -> PAUSE -> PLAY -> STOP
-    // TODO: add a button to clear the input, setting it to 00:00:00
+    /* TODO: BUG: timer runs in the background if you switch to another fragment,
+        but when you return to it the progress bar and everything is reset,
+        eventually killing the app when the background timer finishes */
+
+    /* TODO: save fragments state when switching between them,
+        so that they won't reset when we go back to them */
 
     Uri notification;
+    View view;
     Ringtone ringtone;
     /** action buttons for starting pausing and resetting the timer */
     private FloatingActionButton mStartButton, mPauseButton, mStopButton;
+    private Button mClearButton;
 
     private LinearLayout timerLayoutInput, timerLayoutView;
     /** editText fields and Textviews to display and edit hours seconds and minutes*/
@@ -70,6 +71,7 @@ public class TimerFragment extends Fragment {
 
     /** boolean to keep track of the timer state */
     boolean isPaused = false;
+    boolean isStop = true;
     boolean isRunning = false;
 
     private final String timerChannelID = "timer_channel";
@@ -129,11 +131,13 @@ public class TimerFragment extends Fragment {
         // casting to int to round down the percentage
         progress = (int) progress;
         progressBar.setProgressWithAnimation(progress);
+        //setting notification progress bar
         builder.setProgress(100, (int) progress, false);
         builder.setContentText(totalSecondsLeft+"s left");
         notificationManager.notify(1, builder.build());
     }
 
+    @SuppressLint("ResourceAsColor")
     private void createProgressNotification() {
         notificationManager = NotificationManagerCompat.from(mContext);
 
@@ -145,6 +149,7 @@ public class TimerFragment extends Fragment {
                 .setContentTitle("Timer")
                 .setContentText("Running")
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setColor(getResources().getColor(R.color.purple_500))
                 .setAutoCancel(true);
         builder.setProgress(100, 0, false);
         notificationManager.notify(1, builder.build());
@@ -162,25 +167,23 @@ public class TimerFragment extends Fragment {
     /** when timer is completed */
     public void finishTimer() {
 
-        // this should create a popup notification once the timer finishes
+        // this should create a popup notification once the timer has finished
         NotificationCompat.Builder builderFinish = new NotificationCompat.Builder(
                 Objects.requireNonNull(getActivity()).getApplicationContext(),
                 timerChannelID);
-        builder.setSmallIcon(R.drawable.timer_icon)
+        builderFinish.setSmallIcon(R.drawable.timer_icon)
                 .setContentTitle("Timer")
                 .setContentText("Time's up!")
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setContentIntent(pendingIntent)
                 //.addAction(R.drawable.ic_baseline_snooze_24, "stop", snoozePendingIntent)
                 .setProgress(0, 0, false)
+                .setColor(getResources().getColor(R.color.purple_500))
                 .setAutoCancel(true);
-
-
-
 
         NotificationManagerCompat notificationManager;
         notificationManager = NotificationManagerCompat.from(mContext);
-        notificationManager.notify(1, builder.build());
+        notificationManager.notify(1, builderFinish.build());
         ringtone.play();
 
         /* progress bar completed returns to zer0 percent */
@@ -190,11 +193,13 @@ public class TimerFragment extends Fragment {
         /* set back visibility on input fields */
         timerLayoutInput.setVisibility(LinearLayout.VISIBLE);
         timerLayoutView.setVisibility(LinearLayout.INVISIBLE);
-        secondsEditText.requestFocus();
 
         /* and reset to starting position all the buttons */
+        mClearButton.setEnabled(true);
+        mClearButton.setVisibility(Button.VISIBLE);
         mStartButton.setEnabled(true);
         mStartButton.setVisibility(FloatingActionButton.VISIBLE);
+
         mPauseButton.setEnabled(false);
         mPauseButton.setVisibility(FloatingActionButton.INVISIBLE);
         mStopButton.setEnabled(false);
@@ -209,7 +214,6 @@ public class TimerFragment extends Fragment {
         timerLayoutView = view.findViewById(R.id.timer_text_view);
         //obscuring the view because we want to focus on the input text
         timerLayoutView.setVisibility(LinearLayout.INVISIBLE);
-
 
         hoursEditText = view.findViewById(R.id.hours);
         minutesEditText = view.findViewById(R.id.minutes);
@@ -254,10 +258,14 @@ public class TimerFragment extends Fragment {
 
     /** helper function to setup button functionality */
     public void setupTimerButtons(@NotNull View view) {
+
+        mClearButton = view.findViewById(R.id.clear_button);
         mStartButton = view.findViewById(R.id.start_button);
         mPauseButton = view.findViewById(R.id.pause_button);
         mStopButton = view.findViewById(R.id.stop_button);
 
+        mClearButton.setEnabled(true);
+        mClearButton.setVisibility(Button.VISIBLE);
         mStartButton.setEnabled(true);
         mStartButton.setVisibility(FloatingActionButton.VISIBLE);
 
@@ -265,6 +273,19 @@ public class TimerFragment extends Fragment {
         mPauseButton.setVisibility(FloatingActionButton.INVISIBLE);
         mStopButton.setEnabled(false);
         mStopButton.setVisibility(FloatingActionButton.INVISIBLE);
+
+        // CLEAR INPUT TEXT BUTTON
+        mClearButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                totalSecondsLeft = 0;
+                hoursEditText.setText("00");
+                minutesEditText.setText("00");
+                secondsEditText.setText("00");
+            }
+        });
+
 
         /* START BUTTON IMPLEMENTATION */
         mStartButton.setOnClickListener(new View.OnClickListener() {
@@ -276,9 +297,18 @@ public class TimerFragment extends Fragment {
                 timerLayoutInput.setVisibility(LinearLayout.INVISIBLE);
                 timerLayoutView.setVisibility(LinearLayout.VISIBLE);
 
-                isRunning = true;
                 //start the timer when start is clicked
                 startTime = 0;
+
+                if (secondsEditText.getText().toString().isEmpty()){
+                    secondsEditText.setText("00");
+                }
+                if (minutesEditText.getText().toString().isEmpty()){
+                    minutesEditText.setText("00");
+                }
+                if (hoursEditText.getText().toString().isEmpty()){
+                    hoursEditText.setText("00");
+                }
 
                 //multiply because we convert everything to milliseconds
                 if (isPaused){
@@ -302,6 +332,11 @@ public class TimerFragment extends Fragment {
                 mStopButton.setEnabled(true);
                 mStopButton.setVisibility(FloatingActionButton.VISIBLE);
 
+                mClearButton.setEnabled(false);
+                mClearButton.setVisibility(Button.INVISIBLE);
+
+                isPaused = false;
+                isRunning = true;
                 //starting the timer from startTime with 1 second interval == 1000ms
                 timer = new CountDownTimer(startTime, 1000) {
                     @Override
@@ -324,21 +359,21 @@ public class TimerFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 //pause the timer when this is clicked
-                isPaused = !isPaused; //switch the paused state
-                if (isPaused){
+                isPaused = true; //switch the paused state
+                isRunning = false;
 
-                    timerLayoutInput.setVisibility(LinearLayout.INVISIBLE);
-                    timerLayoutView.setVisibility(LinearLayout.VISIBLE);
+                timerLayoutInput.setVisibility(LinearLayout.INVISIBLE);
+                timerLayoutView.setVisibility(LinearLayout.VISIBLE);
 
-                    mStartButton.setEnabled(true);
-                    mStartButton.setVisibility(FloatingActionButton.VISIBLE);
-                    mPauseButton.setEnabled(false);
-                    mPauseButton.setVisibility(FloatingActionButton.INVISIBLE);
-                    mStopButton.setEnabled(false);
-                    mStopButton.setVisibility(FloatingActionButton.INVISIBLE);
+                mStartButton.setEnabled(true);
+                mStartButton.setVisibility(FloatingActionButton.VISIBLE);
+                mPauseButton.setEnabled(false);
+                mPauseButton.setVisibility(FloatingActionButton.INVISIBLE);
+                mStopButton.setEnabled(false);
+                mStopButton.setVisibility(FloatingActionButton.INVISIBLE);
 
-                    timer.cancel();
-                }
+                //cancel the countdown
+                timer.cancel();
             }
         });
 
@@ -349,17 +384,19 @@ public class TimerFragment extends Fragment {
                 //stop/cancel the timer when this is clicked
                 timer.cancel();
 
-                progressBar.setProgressWithAnimation(0);
-
-
                 timerLayoutInput.setVisibility(LinearLayout.VISIBLE);
                 timerLayoutView.setVisibility(LinearLayout.INVISIBLE);
-                secondsEditText.requestFocus();
 
                 //resetting the textview
                 hoursLeftText.setText("00");
                 minutesLeftText.setText("00");
                 secondsLeftText.setText("00");
+
+
+
+                isPaused = false;
+                isStop = true;
+                isRunning = false;
 
                 //finishTimer("Cancelled");
                 finishTimer();
@@ -367,27 +404,32 @@ public class TimerFragment extends Fragment {
         });
     }
 
+
     /** whenever the fragment is called by the main activity */
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_timer, container, false);
+        if (view == null) {
+            view = inflater.inflate(R.layout.fragment_timer, container, false);
 
-        //calling helper function to setup text and timer buttons
-        progressBar = view.findViewById(R.id.circular_progress_bar);
-        progressBar.setStrokeWidth(50f);
-        setupEditText(view);
-        setupTimerButtons(view);
-        createNotificationChannel();
-        setupIntent();
-        setupRingtone();
-
+            //helper functions to setup text, buttons, notifications
+            progressBar = view.findViewById(R.id.circular_progress_bar);
+            progressBar.setStrokeWidth(50f);
+            setupEditText(view);
+            setupTimerButtons(view);
+            createNotificationChannel();
+            setupIntent();
+            setupRingtone();
+        }
         return view;
     }
 
     @Override
     public void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (savedInstanceState != null){
+
+        }
     }
 
     @Override
