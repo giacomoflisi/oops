@@ -39,11 +39,6 @@ public class TimerFragment extends Fragment {
     // TODO: create intent to open the timer fragment from the notification
     // TODO: add a pause and stop button to the notification
 
-    // TODO: fix bugs in NULL input fields
-    /* TODO: BUG: timer runs in the background if you switch to another fragment,
-        but when you return to it the progress bar and everything is reset,
-        eventually killing the app when the background timer finishes */
-
     /* TODO: save fragments state when switching between them,
         so that they won't reset when we go back to them */
 
@@ -52,7 +47,7 @@ public class TimerFragment extends Fragment {
     Ringtone ringtone;
     /** action buttons for starting pausing and resetting the timer */
     private FloatingActionButton mStartButton, mPauseButton, mStopButton;
-    private Button mClearButton;
+    private Button mClearButton; //clearing input textview
 
     private LinearLayout timerLayoutInput, timerLayoutView;
     /** editText fields and Textviews to display and edit hours seconds and minutes*/
@@ -70,15 +65,16 @@ public class TimerFragment extends Fragment {
     CircularProgressBar progressBar;
 
     /** boolean to keep track of the timer state */
-    boolean isPaused = false;
-    boolean isStop = true;
-    boolean isRunning = false;
+    boolean isPaused;
+    boolean isStop;
+    boolean isRunning;
 
     private final String timerChannelID = "timer_channel";
     NotificationChannel channel;
     NotificationManagerCompat notificationManager;
     NotificationCompat.Builder builder;
     int importance = NotificationManager.IMPORTANCE_DEFAULT;
+    NotificationCompat.Builder builderFinish;
 
     private Context mContext;
 
@@ -94,7 +90,7 @@ public class TimerFragment extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
-        mContext = null;
+        //mContext = null;
     }
 
     // Create an explicit intent
@@ -133,7 +129,7 @@ public class TimerFragment extends Fragment {
         progressBar.setProgressWithAnimation(progress);
         //setting notification progress bar
         builder.setProgress(100, (int) progress, false);
-        builder.setContentText(totalSecondsLeft+"s left");
+        builder.setContentText(totalSecondsLeft+" s left");
         notificationManager.notify(1, builder.build());
     }
 
@@ -162,15 +158,16 @@ public class TimerFragment extends Fragment {
         NotificationManager notificationManager =
                 (NotificationManager) Objects.requireNonNull(getActivity()).getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.createNotificationChannel(channel);
+
+        // this should create a popup notification once the timer has finished
+        builderFinish = new NotificationCompat.Builder(
+                Objects.requireNonNull(getActivity()).getApplicationContext(),
+                timerChannelID);
     }
 
     /** when timer is completed */
     public void finishTimer() {
 
-        // this should create a popup notification once the timer has finished
-        NotificationCompat.Builder builderFinish = new NotificationCompat.Builder(
-                Objects.requireNonNull(getActivity()).getApplicationContext(),
-                timerChannelID);
         builderFinish.setSmallIcon(R.drawable.timer_icon)
                 .setContentTitle("Timer")
                 .setContentText("Time's up!")
@@ -181,8 +178,6 @@ public class TimerFragment extends Fragment {
                 .setColor(getResources().getColor(R.color.purple_500))
                 .setAutoCancel(true);
 
-        NotificationManagerCompat notificationManager;
-        notificationManager = NotificationManagerCompat.from(mContext);
         notificationManager.notify(1, builderFinish.build());
         ringtone.play();
 
@@ -346,8 +341,6 @@ public class TimerFragment extends Fragment {
 
                     @Override
                     public void onFinish() {
-                        //TODO: alert notification
-                        //finishTimer("Done");
                         finishTimer();
                     }
                 }.start();
@@ -392,44 +385,46 @@ public class TimerFragment extends Fragment {
                 minutesLeftText.setText("00");
                 secondsLeftText.setText("00");
 
-
-
                 isPaused = false;
                 isStop = true;
                 isRunning = false;
 
-                //finishTimer("Cancelled");
                 finishTimer();
             }
         });
     }
 
-
     /** whenever the fragment is called by the main activity */
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-        if (view == null) {
-            view = inflater.inflate(R.layout.fragment_timer, container, false);
+        //if (view == null) {
+        view = inflater.inflate(R.layout.fragment_timer, container, false);
+        //helper functions to setup text, buttons, notifications
+        progressBar = view.findViewById(R.id.circular_progress_bar);
+        progressBar.setStrokeWidth(50f);
+        setupEditText(view);
+        setupTimerButtons(view);
+        createNotificationChannel();
+        setupIntent();
+        setupRingtone();
 
-            //helper functions to setup text, buttons, notifications
-            progressBar = view.findViewById(R.id.circular_progress_bar);
-            progressBar.setStrokeWidth(50f);
-            setupEditText(view);
-            setupTimerButtons(view);
-            createNotificationChannel();
-            setupIntent();
-            setupRingtone();
-        }
+        isPaused = false;
+        isRunning = false;
+        isStop = true;
+        //}
+
         return view;
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull @NotNull Bundle outState) {
+        super.onSaveInstanceState(outState);
     }
 
     @Override
     public void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (savedInstanceState != null){
-
-        }
     }
 
     @Override
