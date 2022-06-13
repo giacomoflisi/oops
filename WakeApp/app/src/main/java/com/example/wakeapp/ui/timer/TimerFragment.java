@@ -36,11 +36,6 @@ import static com.example.wakeapp.ui.alarms.SnoozeAlarmReceiver.ACTION_SNOOZE;
 
 public class TimerFragment extends Fragment {
 
-    // TODO: create intent to open the timer fragment from the notification
-    // TODO: add a pause and stop button to the notification
-
-    /* TODO: save fragments state when switching between them,
-        so that they won't reset when we go back to them */
 
     Uri notification;
     View view;
@@ -79,7 +74,8 @@ public class TimerFragment extends Fragment {
     private Context mContext;
 
     PendingIntent pendingIntent;
-    Intent intent;
+    Intent intent, pauseIntent, stopIntent;
+    PendingIntent pausePendingIntent, stopPendingIntent;
 
     @Override
     public void onAttach(@NotNull Context context) {
@@ -95,15 +91,32 @@ public class TimerFragment extends Fragment {
 
     // Create an explicit intent
     public void setupIntent(){
-        intent = new Intent(mContext, TimerFragment.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        pendingIntent = PendingIntent.getActivity(mContext, 0, intent, PendingIntent.FLAG_IMMUTABLE);
+        intent = new Intent(getContext(), TimerFragment.class);
+        //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK |
+        //      Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        pendingIntent = PendingIntent.getBroadcast(getContext(), 0,
+                intent, PendingIntent.FLAG_IMMUTABLE);
 
-        Intent snoozeIntent = new Intent(mContext, TimerFragment.class);
-        snoozeIntent.setAction(ACTION_SNOOZE);
-        snoozeIntent.putExtra(EXTRA_NOTIFICATION_ID, 0);
-        PendingIntent snoozePendingIntent =
-                PendingIntent.getBroadcast(mContext, 0, snoozeIntent, 0);
+        /*
+        pendingIntent = new NavDeepLinkBuilder(mContext)
+                .setComponentName(MainActivity.class)
+                .setGraph(R.navigation.mobile_navigation)
+                .setDestination(R.id.navigation_timer)
+                .createPendingIntent();
+
+        */
+
+        pauseIntent = new Intent(mContext, TimerFragment.class);
+        pauseIntent.setAction(ACTION_SNOOZE);
+        pauseIntent.putExtra(EXTRA_NOTIFICATION_ID, 0);
+        pausePendingIntent =
+                PendingIntent.getBroadcast(mContext, 0, pauseIntent, 0);
+
+        stopIntent = new Intent(mContext, TimerFragment.class);
+        stopIntent.setAction(ACTION_SNOOZE);
+        stopIntent.putExtra(EXTRA_NOTIFICATION_ID, 0);
+        stopPendingIntent =
+                PendingIntent.getBroadcast(mContext, 0, stopIntent, 0);
     }
 
     private void setupRingtone(){
@@ -145,9 +158,13 @@ public class TimerFragment extends Fragment {
                 .setContentTitle("Timer")
                 .setContentText("Running")
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
-                .setColor(getResources().getColor(R.color.purple_500))
-                .setAutoCancel(true);
+                .setColor(getResources().getColor(R.color.purple_500, Objects.requireNonNull(getActivity()).getTheme()))
+                .setContentIntent(pendingIntent)
+                .setAutoCancel(false);
         builder.setProgress(100, 0, false);
+        builder.addAction(R.id.pause_button, getString(R.string.pause), pausePendingIntent);
+        builder.addAction(R.id.stop_button, getString(R.string.stop), stopPendingIntent);
+
         notificationManager.notify(1, builder.build());
     }
 
@@ -172,10 +189,9 @@ public class TimerFragment extends Fragment {
                 .setContentTitle("Timer")
                 .setContentText("Time's up!")
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
-                .setContentIntent(pendingIntent)
-                //.addAction(R.drawable.ic_baseline_snooze_24, "stop", snoozePendingIntent)
                 .setProgress(0, 0, false)
-                .setColor(getResources().getColor(R.color.purple_500))
+                .setColor(getResources().getColor(R.color.purple_500, Objects.requireNonNull(getActivity()).getTheme()))
+                .setContentIntent(pendingIntent)
                 .setAutoCancel(true);
 
         notificationManager.notify(1, builderFinish.build());
@@ -183,7 +199,6 @@ public class TimerFragment extends Fragment {
 
         /* progress bar completed returns to zer0 percent */
         progressBar.setProgressWithAnimation(0);
-        //progressBar.setVisibility(View.INVISIBLE);
 
         /* set back visibility on input fields */
         timerLayoutInput.setVisibility(LinearLayout.VISIBLE);

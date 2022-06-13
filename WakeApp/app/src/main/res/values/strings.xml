@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">WakeApp</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
     <string name="title_alarms">Alarms</string>
     <string name="title_clock">Clock</string>
     <string name="title_timer">Timer</string>
@@ -14,6 +13,8 @@
     <string name="default_string"> </string>
     <string name="timer_channel">TimerChannel</string>
     <string name="alarm_channel">AlarmChannel</string>
+    <string name="pause">pause</string>
+    <string name="stop">stop</string>
 
     <string name="large_text">
         "Material is the metaphor.\n\n"
