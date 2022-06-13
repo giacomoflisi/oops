@@ -10,7 +10,6 @@ public class ChronoViewModel extends ViewModel{
 
     public ChronoViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("TODO: implement a clock view here");
     }
 
     public LiveData<String> getText() {

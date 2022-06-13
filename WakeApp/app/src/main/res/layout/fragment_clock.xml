@@ -30,13 +30,22 @@
                     android:format24Hour="hh:mm:ss a"
                     android:fontFamily="@font/bai_jamjuree_semibold"
                     android:textSize="50sp" android:gravity="center"/>
-            <Switch
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/switch_Analog_Digital"
-                    android:layout_gravity="bottom|right" android:height="48dp"
-                    android:textOff="@string/digital_tag" android:textOn="@string/analog_tag" android:textSize="16sp"
-                    android:fontFamily="@font/bai_jamjuree_semibold" android:showText="true"
-            />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                <Switch
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:id="@+id/switch_Analog_Digital"
+                        android:layout_gravity="bottom|right"
+                        android:textOff="@string/digital_tag" android:textOn="@string/analog_tag"
+                        android:textSize="16sp"
+                        android:fontFamily="@font/bai_jamjuree_semibold" android:showText="false"
+                        android:minHeight="48dp"
+                        app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:minWidth="48dp"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </FrameLayout>
     </LinearLayout>

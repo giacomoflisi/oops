@@ -10,7 +10,6 @@ public class SmartViewModel extends ViewModel {
 
     public SmartViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is dashboard fragment");
     }
 
     public LiveData<String> getText() {

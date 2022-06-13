@@ -6,15 +6,19 @@ import android.view.HapticFeedbackConstants;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.*;
+import android.widget.Chronometer;
+import android.widget.ImageButton;
+import android.widget.TextView;
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import com.example.wakeapp.R;
 import com.example.wakeapp.databinding.FragmentChronoBinding;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Objects;
 
 public class ChronoFragment extends Fragment {
 
@@ -45,6 +49,8 @@ public class ChronoFragment extends Fragment {
 
         // Initiate the chronometer
         chronometer = (Chronometer) getView().findViewById(R.id.chronometer);
+        chronometer.setTextColor(getResources().getColor(R.color.purple_200,
+                Objects.requireNonNull(getActivity()).getTheme()));
 
         // Start, Stop, Pause, create a Step for the Chronometer
         start = (ImageButton) getView().findViewById(R.id.start_chrono_button);
@@ -105,9 +111,9 @@ public class ChronoFragment extends Fragment {
             public void onClick(View view) {
                 requireView().performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
                 stepCounter++;
-                if(stepCounter>=21) {
-                    Toast.makeText(getActivity().getApplicationContext(),"Maximum number of steps reached",
-                            Toast.LENGTH_SHORT).show();
+                if(stepCounter>=14) {
+                    Toast.makeText(Objects.requireNonNull(getActivity()).getApplicationContext(),
+                            "Maximum number of steps reached", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 stepShower.append("N."+stepCounter+" "+showElapsedTime()+"\n");
