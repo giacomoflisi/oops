@@ -1,4 +1,4 @@
-### WakeApp - The Time Control App
+# WakeApp - The Time Control App
 
 ## Main features
 - Digital/Analog clock
