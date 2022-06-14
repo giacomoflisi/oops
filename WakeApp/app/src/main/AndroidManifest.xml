@@ -10,7 +10,8 @@
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
     <uses-permission android:name="android.permission.DISABLE_KEYGUARD"/>
     <uses-permission android:name="android.permission.ACTION_MANAGE_OVERLAY_PERMISSION"/>
-
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
             android:allowBackup="true"
@@ -60,6 +61,10 @@
         >
         </activity>
 
+        <activity android:name=".BarcodeScannerActivity"
+                  android:label="Scan Barcode"
+        />
+
         <service android:name=".ui.alarms.AlarmService" />
         <service android:name=".ui.alarms.RescheduleAlarmsService" />
 
@@ -86,6 +91,11 @@
                 <action android:name="com.your.app.SnoozeAlarmReceiver.ACTION_SNOOZE" />
             </intent-filter>
         </receiver>
+
+        <meta-data
+                android:name="com.google.android.gms.vision.DEPENDENCIES"
+                android:value="barcode" />
+
 
     </application>
 

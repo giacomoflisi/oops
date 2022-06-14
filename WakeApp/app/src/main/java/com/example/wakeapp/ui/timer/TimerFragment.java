@@ -110,13 +110,13 @@ public class TimerFragment extends Fragment {
         pauseIntent.setAction(ACTION_SNOOZE);
         pauseIntent.putExtra(EXTRA_NOTIFICATION_ID, 0);
         pausePendingIntent =
-                PendingIntent.getBroadcast(mContext, 0, pauseIntent, 0);
+                PendingIntent.getBroadcast(mContext, 0, pauseIntent, PendingIntent.FLAG_IMMUTABLE);
 
         stopIntent = new Intent(mContext, TimerFragment.class);
         stopIntent.setAction(ACTION_SNOOZE);
         stopIntent.putExtra(EXTRA_NOTIFICATION_ID, 0);
         stopPendingIntent =
-                PendingIntent.getBroadcast(mContext, 0, stopIntent, 0);
+                PendingIntent.getBroadcast(mContext, 0, stopIntent, PendingIntent.FLAG_IMMUTABLE);
     }
 
     private void setupRingtone(){

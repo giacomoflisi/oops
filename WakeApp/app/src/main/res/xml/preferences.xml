@@ -2,21 +2,25 @@
 <androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <PreferenceCategory
-            android:title="Opzione1">
+            android:title="@string/title_clock">
 
     </PreferenceCategory>
     <CheckBoxPreference
             android:defaultValue="false"
-            android:title="Check box preference" android:key="check_box_preference_1"/>
+            android:title="Enable Barcode mode" android:key="check_box_preference_1"
+    />
+
     <PreferenceCategory
-            android:title="Opzione2">
+            android:title="@string/title_alarms">
 
     </PreferenceCategory>
     <SwitchPreference
             android:defaultValue="false"
             android:title="Switch preference" android:key="switch_preference_1"/>
     <PreferenceCategory
-            android:title="Opzione 3">
+            android:title="@string/title_chrono">
 
+        <PreferenceCategory
+                android:title="Timer"/>
     </PreferenceCategory>
 </androidx.preference.PreferenceScreen>

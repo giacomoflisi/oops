@@ -111,7 +111,7 @@ public class ChronoFragment extends Fragment {
             public void onClick(View view) {
                 requireView().performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
                 stepCounter++;
-                if(stepCounter>=14) {
+                if(stepCounter>=11) {
                     Toast.makeText(Objects.requireNonNull(getActivity()).getApplicationContext(),
                             "Maximum number of steps reached", Toast.LENGTH_SHORT).show();
                     return;
